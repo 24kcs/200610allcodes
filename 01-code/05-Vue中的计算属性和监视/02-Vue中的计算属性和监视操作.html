@@ -27,6 +27,7 @@
     </fieldset>
   </div>
   <script type="text/javascript">
+
     const vm = new Vue({
       el: '#app',
       data: {
@@ -69,7 +70,7 @@
       }
     })
 
-    // 通过Vue的实例对象调用$watch方法来进行监视操作
+    通过Vue的实例对象调用$watch方法来进行监视操作
     vm.$watch('lastName', function (val) {
       // val 就是lastName这个属性值
       this.fullName2 = this.firstName + '_' + val

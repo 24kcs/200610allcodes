@@ -16,26 +16,24 @@
 	<div id="app">
 		<fieldset>
 			<legend>style操作:style中书写的时候有多个值,采用对象写法</legend>
-			<p :style="{color:myColor,fontSize:myFont}">强哥</p>
+			<p :style="{color:myColor,backgroundColor:bgColor}">强哥</p>
 		</fieldset>
 		<fieldset>
 			<legend>style操作:动态操作设置键值,采用数组写法,数组中的每一项都是键值对</legend>
-			<p :style="[myColor1,myFont1,bgColor]">努力拼搏</p>
+			<p :style="[myColor1,bgColor2]">努力拼搏</p>
 		</fieldset>
 	</div>
 	<script type="text/javascript">
 
-		const vm = new Vue({
-			el: '#app',
-			data: {
-				myColor: 'green',
-				myFont: '50px',
-				// 属性的值应该是对象的写法
-				myColor1:{color:'yellow'},
-				myFont1:{fontSize:'50px'},
-				bgColor:{backgroundColor:'red'}
-			}
-		})
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			myColor:'red',
+			bgColor:'green',
+			myColor1:{color:'green'},
+			bgColor2:{backgroundColor:'red'}
+		}
+	})
 
 
 

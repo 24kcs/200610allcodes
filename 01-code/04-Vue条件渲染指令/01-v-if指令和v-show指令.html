@@ -13,38 +13,30 @@
 <body>
   <div id="app">
     <!--方式1:使用v-if指令实现-->
-    <button @click="changeSeen">切换显示效果</button>
-    <p v-if="isSeen">我喜欢你</p>
-    <p v-else>你喜欢我</p>
+   <button @click="setSeen">切换显示效果</button>
+   <p v-if="isSeen">我喜欢你</p>
+   <p v-else>我不喜欢你</p>
     <hr>
     <!--方式2:使用v-show指令实现-->
-    <button @click="isShow=!isShow">切换显示效果</button>
-    <p v-show="isShow">我喜欢男人,渊哥说</p>
+    <button @click="isShow=!isShow">切换显示</button>
+    <p v-show="isShow">我来了</p>
   </div>
   <script type="text/javascript">
     // 需求:点击按钮,切换两对p标签的显示和隐藏操作
     // 实例Vue的对象
+  
     const vm = new Vue({
-      el: '#app', // 根据选择器获取html容器对象
-      // 数据对象
-      data: {
-        // 属性，默认值是true
-        isSeen: true,
+      el:'#app',
+      data:{
+        isSeen:false,
         isShow:false
       },
-      // 书写方法的对象
       methods: {
-        // 点击按钮的点击事件的回调函数
-        changeSeen() {
-          // 设置当前的属性的值取反操作
-          // this--- 当前的Vue的实例对象
+        setSeen(){
           this.isSeen = !this.isSeen
         }
       }
     })
-    // console.log(vm.data.isSeen)
-    // console.log(vm._data.isSeen)
-    // console.log(vm.$data.isSeen)
 
 
 

@@ -20,12 +20,13 @@
 					索引:{{index}}---id:{{item.id}}---名字:{{item.name}}---年龄:{{item.age}}
 				</li>
 			</ul>
-			<button @click="state=1">升序排序</button>
-			<button @click="state=2">降序排序</button>
-			<button @click="state=0">原来顺序</button>
+			<button @click="state=1">升序</button>
+			<button @click="state=2">降序</button>
+			<button @click="state=0">原序</button>
 		</fieldset>
 	</div>
 	<script type="text/javascript">
+
 		const vm = new Vue({
 			el: '#app',
 			data: {

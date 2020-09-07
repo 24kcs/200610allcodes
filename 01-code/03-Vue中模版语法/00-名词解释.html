@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <!--通过本地引入vue.js文件的方式进行开发-->
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!--HTML中的容器-->
+  <div id="app">
+    <!--HTML的模版-->
+    <p>{{msg}}</p>
+  </div>
+  <script type="text/javascript">
+    // 实例化Vue的对象,并初始化(小括号里的大括号是配置对象)
+    const vm = new Vue({
+      // el----->element----通过选择器获取html中的容器对象
+      el: '#app',
+      // 数据对象
+      data: {
+        // msg---->属性,后面的内容称为:值
+        msg: '我喜欢华哥,华哥喜欢超哥,超哥喜欢培哥,雷哥说'
+      }
+    });
+
+    // 通过vm获取html中的容器,容器中的所有的html称之为模版
+    // data中的msg叫属性
+    // HTML容器(模版)中的msg叫表达式
+
+
+    // MVVM模式:通过vm操作数据,改变界面的效果(vm--->m---->v)
+  </script>
+</body>
+
+</html>

@@ -14,23 +14,22 @@
 	<div id="app">
 		<fieldset>
 			<legend>数组数据更新操作</legend>
-			<button @click="addPerson">添加数据</button><br />
-			名字:<input type="text" v-model="perName" /><br />
-			年龄:<input type="text" v-model="age" /><br />
-			描述:<input type="text" v-model="desc" /><br />
+			<button @click="addPerson">添加一个人</button><br>
+			姓名:<input type="text" v-model="name"/><br>
+			年龄:<input type="text" v-model="age" /><br>
+			描述:<input type="text" v-model="desc" /><br>
+			<hr>
 			<ul>
-				<li v-for="(item,index) in persons" :key="index">
-					索引:{{index}}---id:{{item.id}}---名字:{{item.name}}---年龄:{{item.age}}---描述:{{item.desc}}
-					<button @click="delPerson(index)">删除</button>---
-					<button @click="updatePerson(index,{id:++perId,name:perName,age,desc})">修改</button>
+				<li v-for="(per,index) in persons" :key="per.id">
+					索引:{{index}}---名字:{{per.name}}----年龄:{{per.age}}---描述:{{per.desc}}---
+					<button @click="delPerson(index)">删除</button>----
+					<button @click="updatePerson(index,{id:++perId,name,age,desc})">修改</button>
 				</li>
-
 			</ul>
 		</fieldset>
 	</div>
 	<script type="text/javascript">
 
-		// 通过v-for指令遍历数据,并及时的展示数据
 
 		const vm = new Vue({
 			el: '#app',

@@ -17,7 +17,7 @@
       <ol>
         <!--item和index的变量名可以随便的修改-->
         <li v-for="(per,index) in persons" :key="per.id">
-          索引:{{index}}---id:{{per.id}}---名字:{{per.name}}----性别:{{per.gender}}---年龄:{{per.age}}
+          索引:{{index}}----id:{{per.id}}---名字:{{per.name}}---性别:{{per.gender}}---年龄:{{per.age}}
         </li>
       </ol>
       <hr>
@@ -26,6 +26,7 @@
         <li v-for="per in persons" :key="per.id">
           id:{{per.id}}---名字:{{per.name}}----性别:{{per.gender}}---年龄:{{per.age}}
         </li>
+     
       </ul>
     </fieldset>
     <hr>
@@ -35,6 +36,8 @@
         <li v-for="(value,key,index) in obj" :key="index">
           {{key}}-----{{value}}----{{index}}
         </li>
+
+       
       </ul>
     </fieldset>
   </div>
