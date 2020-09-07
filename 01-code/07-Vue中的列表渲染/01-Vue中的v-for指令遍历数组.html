@@ -16,28 +16,29 @@
       <legend>遍历数组</legend>
       <ol>
         <!--item和index的变量名可以随便的修改-->
+        <!--v-for指令:遍历数据的指令,key中放的是标识-->
         <li v-for="(per,index) in persons" :key="per.id">
-          索引:{{index}}----id:{{per.id}}---名字:{{per.name}}---性别:{{per.gender}}---年龄:{{per.age}}
+          索引:{{index}}---id:{{per.id}}--名字:{{per.name}}---年龄:{{per.age}}---性别:{{per.gender}}
         </li>
       </ol>
       <hr>
       <ul>
         <!--再次遍历数组-->
         <li v-for="per in persons" :key="per.id">
-          id:{{per.id}}---名字:{{per.name}}----性别:{{per.gender}}---年龄:{{per.age}}
+          id:{{per.id}}--名字:{{per.name}}---年龄:{{per.age}}---性别:{{per.gender}}
         </li>
-     
+
       </ul>
     </fieldset>
     <hr>
     <fieldset>
       <legend>遍历对象</legend>
       <ul>
+
         <li v-for="(value,key,index) in obj" :key="index">
-          {{key}}-----{{value}}----{{index}}
+          属性名字:{{key}}---属性值:{{value}}----索引:{{index}}
         </li>
 
-       
       </ul>
     </fieldset>
   </div>
@@ -50,21 +51,34 @@
       el: '#app',
       data: {
         persons: [
+
           { id: 1, name: '卡卡西', age: 34, gender: '男' },
           { id: 2, name: '自来也', age: 45, gender: '男' },
-          { id: 3, name: '大蛇丸', age: 46, gender: '男' },
-          { id: 4, name: '佐助', age: 23, gender: '男' },
-          { id: 5, name: '黑崎一护', age: 18, gender: '男' },
-          { id: 6, name: '雏田', age: 16, gender: '女' },
-          { id: 7, name: '纲手', age: 48, gender: '女' }
+          { id: 3, name: '黑崎一护', age: 16, gender: '男' },
+          { id: 4, name: '佐助', age: 18, gender: '男' },
+          { id: 5, name: '华哥', age: 57, gender: '女' }
         ],
-        obj: {
-          name: '莱亚魅力',
-          gender: '女',
-          age: 30
+        obj:{
+          name:'凤姐',
+          age:35,
+          gender:'男'
         }
       }
-    })
+    });
+
+
+
+
+
+    // 对象,具有一定的属性或者方法,特指的某个事物
+    // 对象有特征或行为,特征---属性,行为---方法
+    // var per = {
+    //   name:'小明',
+    //   age:20,
+    //   sayHi(){
+    //     console.log('啊捏哈谁有')
+    //   }
+    // }
 
 
     /*

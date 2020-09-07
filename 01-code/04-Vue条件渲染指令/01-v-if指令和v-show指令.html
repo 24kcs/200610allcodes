@@ -13,31 +13,60 @@
 <body>
   <div id="app">
     <!--方式1:使用v-if指令实现-->
-   <button @click="setSeen">切换显示效果</button>
-   <p v-if="isSeen">我喜欢你</p>
-   <p v-else>我不喜欢你</p>
-    <hr>
+    <!-- <button @click="setSeen">切换显示效果</button> -->
+    <button @click="isSeen=!isSeen">切换显示效果</button>
+    <p v-if="isSeen">我喜欢你</p>
+    <p v-else>你喜欢我</p>
+  
     <!--方式2:使用v-show指令实现-->
-    <button @click="isShow=!isShow">切换显示</button>
-    <p v-show="isShow">我来了</p>
+    <hr>
+    <button @click="isShow=!isShow">切换显示效果</button>
+    <p v-show="isShow">我想你啊</p>
+   
   </div>
   <script type="text/javascript">
     // 需求:点击按钮,切换两对p标签的显示和隐藏操作
-    // 实例Vue的对象
-  
+
+
     const vm = new Vue({
       el:'#app',
       data:{
-        isSeen:false,
-        isShow:false
+        isSeen:false, // 默认是false,表示的是隐藏起来
+        isShow:false, // 默认不显示
       },
       methods: {
-        setSeen(){
-          this.isSeen = !this.isSeen
-        }
+        // 按钮的点击事件对应的回调函数
+        // setSeen(){
+        //   // 获取isSeen属性并取反
+        //   this.isSeen = !this.isSeen
+        // }
       }
-    })
+    });
 
+    // console.log(vm.data)
+
+    /*
+    
+    v-if和v-else通常都是配合使用,
+    v-if可以单独使用
+    使用了v-if指令或者v-else指令的标签,如果为true,则该标签在DOM树存在,如果表达式的值是false,当前的这个标签在DOM树是不存在的
+    我们在methods对象中的回调函数(事件对应的回调函数),内部想要获取data对象中定义的属性isSeen或者是设置该属性的值,不是通过this.data.isSeen,而是直接通过this就可以获取的,原因:Vue中有数据代理
+
+   
+
+    v-bind指令,强制数据绑定
+    v-model指令,双向数据绑定指令
+    v-on指令,事件绑定指令
+    条件渲染指令:
+    v-if和v-else,v-else-if
+    v-show
+
+
+     v-show指令,可以设置标签的显示和隐藏,几乎和v-if类似,但是,区别在于使用v-show指令的标签,无论是显示还是隐藏,在DOM树中使用存在,v-if(v-else,v-else-if)指令的标签,有可能在DOM树中不存在
+    
+    */
+
+  
 
 
 

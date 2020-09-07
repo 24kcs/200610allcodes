@@ -29,54 +29,57 @@
   <script type="text/javascript">
 
     const vm = new Vue({
+      // 根据选择器获取html的容器对象
       el: '#app',
+      // 数据对象
       data: {
         firstName: '东方',
         lastName: '不败',
-        fullName2: '' // 姓名
+        fullName2: '', // 第二个文本框所需要的数据,姓名
       },
-      // 计算属性,是一个对象
+      // 计算属性
       computed: {
-        // 如果当前的这个计算属性中只需要设置get,那么下面的代码可以简写,
-        // 计算属性名字(){}  其实就是get的简写方式
+        // get操作
         fullName1() {
           return this.firstName + '_' + this.lastName
         },
+        // 当前fullName3这个计算属性的完整写法
+        // 如果当前的计算属性有get,也有set,说明这个计算属性fullName3既可以获取值,也可以修改值
         fullName3: {
+          // 外部如果要获取fullName3属性值的时候,会自动的进入到get中
           get() {
             return this.firstName + '_' + this.lastName
           },
+          // 如果当前的这个属性仅仅是获取数据,而不需要设置数据,那么set可以省略,
+          // 如果set省略,此时内部只有get了,那么,就可以简化成fullName1的计算属性的形式了
           set(val) {
-            const name = val.split('_')
-            this.firstName = name[0]
-            this.lastName = name[1]
+            // 外部要修改fullName3属性值的时候,就会进入到当前的set中,val这个参数就是外部所赋的值
+            // console.log(val)
+            const names = val.split('_');
+            this.firstName = names[0];
+            this.lastName = names[1];
+
           }
         }
-      }, // end computed
-      // 监视: 是一个对象
+      },
+      // 监视
       watch: {
-        // 监视firstName这个属性
+        // val 就是firstName属性的值
         firstName(val) {
-          // val 就是firstName属性值
-          // 只要这个属性的值发生变化,就会进入当前的这个回调中
+          // 立刻的改变fullName2属性的值
           this.fullName2 = val + '_' + this.lastName
         },
-        // lastName(val){
-        //   // val 就是firstName属性值
-        //   // 只要这个属性的值发生变化,就会进入当前的这个回调中
-        //   this.fullName2 = this.firstName + '_' +val
-
+        // lastName(val) {
+        //   this.fullName2 = this.firstName + '_' + val
         // }
       }
-    })
 
-    通过Vue的实例对象调用$watch方法来进行监视操作
+    });
+
+    // 可以通过实例对象调用监视的方法,从而实现相关的需求
     vm.$watch('lastName', function (val) {
-      // val 就是lastName这个属性值
       this.fullName2 = this.firstName + '_' + val
     })
-
-
 
 
     /*

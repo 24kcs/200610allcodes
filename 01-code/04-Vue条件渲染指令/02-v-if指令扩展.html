@@ -12,23 +12,24 @@
 
 <body>
   <div id="app">
-    <button @click="score='D'">设置分数级别,显示对应的分数区间</button>
-   <p v-if="score==='A'">90到100之间</p>
-   <p v-else-if="score==='B'">80到90之间</p>
-   <p v-else-if="score==='C'">70到80之间</p>
-   <p v-else-if="score==='D'">60到70之间</p>
-   <p v-else>不及格</p>
+    <button @click="score='C'">设置级别,显示对应的分数段</button>
+    <p v-if="score==='A'">90到100分之间</p>
+    <p v-else-if="score==='B'">80到90分之间</p>
+    <p v-else-if="score==='C'">70到80分之间</p>
+    <p v-else-if="score==='D'">60到70分之间</p>
+    <p v-else>不及格</p>
+
   </div>
   <script type="text/javascript">
     // 需求:点击按钮设置分数的级别,页面中显示对应的分数的区间即可
-   const vm = new Vue({
-     el:'#app',
-     data:{
-       score:'C'
-     }
-   })
 
-  
+    const vm = new Vue({
+      el:'#app',
+      data:{
+        score:'A'
+      }
+    });
+
 
     /**
      * 注意:

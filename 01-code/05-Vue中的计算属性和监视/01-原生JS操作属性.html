@@ -10,59 +10,54 @@
 </head>
 
 <body>
-
-
   <script type="text/javascript">
     // 需求:在某个对象中,某个属性的值改变,相关联的属性的值会自动发生改变----vue中的计算属性
 
+    // 定义一个对象
     const person = {
-      firstName: '东方',  // 姓氏
+      firstName: '东方', // 姓氏
       lastName: '不败' // 名字
-    }
+    };
 
-    // 为某个对象添加相关联的属性(为某个对象添加属性,并且该属性和该对象中其他的属性进行关联)
-    /*
-     参数1: 某个对象,为某个对象添加属性,这里的某个对象就是第一个参数
-     参数2: 要添加的属性的名字----字符串类型
-     参数3: 配置对象,可以设置该属性的相关的配置操作
-    
-    */
+    // 通过Object.defineProperty()方法为对象添加属性
+    // 参数1: 要为哪一个对象添加属性,那么这个对象就是第一个参数
+    // 参数2: 要添加的这个属性名字,是字符串类型的
+    // 参数3: 配置对象,用来对添加的属性做具体的设置(该属性是否可以被删除,属性的默认值,值师傅可以改变,是否可以设置get和set)
     Object.defineProperty(person, 'fullName', {
-      configurable: false, // 默认是false,表示该属性是否可以被删除操作(该属性的修改操作)
-      enumerable: false, // 默认是false,表示的是该属性是否可以被枚举遍历
+      configurable: false, // 默认是false,该属性不能被删除
+      enumerable: false, // 默认是false,该属性是否可以被枚举遍历
       // value:'哈_哈', // 该属性的默认值
-      // writable:true, // 默认是false,表示的是该属性值是否可以被修改
+      // writable:true, // 默认是false,该属性的值是否可以被修改
+      // 如果在当前的配置对象中设置了value和writable,那么就不要设置get或set
+      // 当在外面通过person.fullName来获取该属性的值的时候,会自动的进入到当前的get方法中
+      // get方法的作用是用来获取该属性的值的
       get() {
-        // 把获取到的值给fullName属性,把值存入到fullName这个属性中
-        // 什么时候会进入到get方法内部,当在外部通过person.fullName的时候就会进来,例子:cosole.log(person.fullName)
+        // return 后面的结果会直接塞进fullName属性中
         return this.firstName + '_' + this.lastName
       },
-      set(val) {
-        // 把fullName属性的值获取到之后,取出来,分别给其他的属性
-        // 什么时候会进入到set方法内部,当外部通过person.fullName赋值的时候会进来,例子:person.fullName='小明'
-        const name = val.split('_')
-        this.firstName = name[0]
-        this.lastName = name[1]
+      // 当在外面通过person.fullName='值'来设置该属性的值的时候,会自动的进入到当前的set方法中
+      // set方法的作用是用来为该属性的值进行赋值操作的
+      set(val) { 
+        const names = val.split('_');
+        this.firstName = names[0]; // 姓氏
+        this.lastName = names[1]; // 名字
       }
-    })
-
-  
-    // 设置姓名
-    person.fullName = person.firstName + '_' + person.lastName
-    console.log(person.fullName)
-    // 修改姓氏
-    person.firstName = '西门'
-    // 修改名字
-    person.lastName = '强哥'
-    // 查看姓名
-    console.log(person.fullName)
-    // 修改姓名
-    person.fullName = '诸葛_孔明'
-    // 查看姓氏和名字
-    console.log(person.firstName, person.lastName)
+    });
 
 
- 
+    // 显示姓名
+    // js本身是一门动态类型的语言,所以,对象没有什么,只需要点一下,该对象就有了这个属性,但是,该属性和对象中其他的属性没有真正的关联关系(某个属性的值发生变化,当前的这个属性的值不会自动的发生变化)
+    person.fullName = person.firstName + '_' + person.lastName;
+    console.log(person.fullName);
+    // 修改姓氏和名字
+    person.firstName = '西门';
+    person.lastName = '华哥';
+    // 结果没有改变
+    console.log(person.fullName);
+    // 改变姓名
+    person.fullName = '诸葛_孔明';
+    console.log(person.firstName);
+    console.log(person.lastName);
 
 
   </script>
