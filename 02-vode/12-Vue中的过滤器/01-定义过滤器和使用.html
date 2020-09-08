@@ -15,12 +15,12 @@
 		<h2>显示格式化的日期时间</h2>
 		<h2>{{time}}</h2>
 		<h2>{{time|formatTime1}}</h2>
-		<h2>{{time|formatTime2('YYYY')}}</h2>
+		<h2>{{time|formatTime2('YYYY-MM-DD')}}</h2>
 		<h2>{{time|formatTime3}}</h2>
 	</div>
 
 	<!-- <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.js"></script> -->
-	<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.24.0/moment.js"></script>
 	<script type="text/javascript">
 		/**
 		 * Vue1.0中有自己的过滤器:filter
@@ -44,47 +44,28 @@
 		 * 
 		 * 
 		*/
-		//定义过滤器:
-		Vue.filter('formatTime1', value => {
-			return moment(value).format('YYY-MM-DD hh:mm:ss')
-		});
-		Vue.filter('formatTime2', (value, formatString) => {
-			return moment(value).format(formatString)
-		});
-		Vue.filter('formatTime3', (value, formatString='hh:mm:ss') => {
-			return moment(value).format(formatString)
-		});
+	
 
-		const vm = new Vue({
-			el: '#app',
-			data: {
-				time: Date.now()
-			}
-		})
+	// 定义过滤器
+	Vue.filter('formatTime1',function(value){
+		return moment(value).format('YYYY-MM-DD hh:mm:ss')
+	});
+	Vue.filter('formatTime2',function(value,formatString){
+		return moment(value).format(formatString)
+	});
 
-		// Vue.filter('formatTime', value => {
-		// 	return moment(value).format('YYYY-MM-DD hh:mm:ss')
-		// })
-		// Vue.filter('formatTime2',(value,formatString='YYYY-MM-DD hh:mm:ss')=>{
-		// 	return moment(value).format(formatString)
-		// })
+	Vue.filter('formatTime3',function(value,formatString='YY-MM-DD'){
+		return moment(value).format(formatString)
+	});
 
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			time:Date.now()
+		}
+	})
 
-		// Vue.filter('formatTime1', (value) => {
-		// 	return moment(value).format('YYYY-MM-DD hh:mm:ss');
-		// })
-		// Vue.filter('formatTime2', (value, formatString = 'YYYY-MM-DD HH:mm:ss') => {
-		// 	return moment(value).format(formatString);
-		// })
-		// Vue.filter('formatTime3', (value, formatString) => {
-		// 	return moment(value).format(formatString || 'YYYY-MM-DD hh:mm:ss');
-		// })
-		// const vm = new Vue({
-		// 	el: '#app',
-		// 	data: {
-		// 		time: Date.now() - 1000
-		// 	}
-		// })
+	
 	</script>
 </body>
 

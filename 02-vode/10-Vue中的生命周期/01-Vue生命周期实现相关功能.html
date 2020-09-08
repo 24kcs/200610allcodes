@@ -12,33 +12,43 @@
 
 <body>
 	<div id="app">
-		<button @click="close">干掉vm和定时器</button>
+		<button @click="clear">干掉vm和定时器</button>
 		<p v-show="isShow">哈哈</p>
 	</div>
 	<script type="text/javascript">
+
 		const vm = new Vue({
 			el: '#app',
 			data: {
-				isShow: false
+				isShow: false // p标签显示或者隐藏
 			},
 			methods: {
-				close() {
+				// 点击按钮,干掉vm和定时器
+				clear() { 
+					// 干掉了vm
 					this.$destroy()
+					// 清理定时器
+					// clearInterval(this.timeId)
 				}
 			},
-			mounted() {
+			// 当前的界面渲染完毕后就触发内部的代码----回调函数
+			mounted () {
 				this.timeId = setInterval(() => {
 					this.isShow = !this.isShow
 					console.log('哈哈')
 				}, 1000);
 			},
-			beforeDestroy() {
+			// 在当前的Vue的实例对象被销毁之前的回调函数---此时会进来
+			beforeDestroy () {
+				// console.log('vm要挂了')
 				clearInterval(this.timeId)
-			}
+			},
+		
 		});
 
 
 
+		
 	</script>
 </body>
 

@@ -12,11 +12,9 @@
 
 <body>
 	<div id="app">
-
-
 		<button @click="clear">干掉vm</button>
 		<button @click="updateData">更新数据</button>
-		<p v-show="isShow">你打我啊</p>
+		<p v-show="isShow">记住这些生命周期钩子(回调函数)</p>
 	</div>
 	<script type="text/javascript">
 		const vm = new Vue({
@@ -24,48 +22,69 @@
 			data: {
 				isShow: false
 			},
-			// 数据初始化之前
-			beforeCreate () {
-				console.log('beforeCreate数据初始化之前',this.isShow)
-			},
-			// 数据初始化之后
-			created () {
-				console.log('created数据初始化之后',this.isShow)
-			},
-			// 页面渲染之前
-			beforeMount () {
-				console.log('beforeMount,页面渲染之前')
-			},
-			// 界面渲染之后
-			mounted () {
-				console.log('mounted,页面渲染之后')
-			},
-			// 界面更新之前
-			beforeUpdate () {
-				console.log('beforeUpdate,界面更新前',this.isShow)
-			},
-			// 界面更新之后
-			updated () {
-				console.log('updated,界面更新后',this.isShow)
-			},
-			// 销毁前
-			beforeDestroy () {
-				console.log('beforeDestroy销毁之前')
-			},
-			// 销毁之后
-			destroyed () {
-				console.log('destroyed销毁之后')
-			},
 			methods: {
-				updateData(){
+				// 更新数据
+				updateData() {
 					this.isShow = !this.isShow
 				},
+				// 干掉Vue的实例对象
 				clear(){
 					this.$destroy()
 				}
-			}
+			},
+			// 数据初始化之前的生命周期回调函数
+			beforeCreate() {
+				console.log('beforeCreate,数据初始化之前...', this.isShow)
+			},
+			// 数据初始化之后的生命周期回调函数
+			created() {
+				console.log('created,数据初始化之后...', this.isShow)
+			},
+			// 界面渲染之前的生命周期回调
+			beforeMount() {
+				console.log('beforeMount,界面渲染之前...')
+			},
+			// 界面渲染之后的生命周期钩子
+			mounted() {
+				console.log('mounted,界面渲染之后...')
+			},
+			// 界面更新之前
+			beforeUpdate() {
+				console.log('beforeUpdate,界面更新之前', this.isShow)
+			},
+			// 界面更新之后
+			updated() {
+				console.log('updated,界面更新之后', this.isShow)
+			},
+			// 销毁之前
+			beforeDestroy() {
+				console.log('beforeDestroy,销毁之前')
+			},
+			destroyed() {
+				console.log('destroyed,销毁之后')
+			},
+
 		})
-     
+
+
+
+		/*
+
+			1. 开辟内存空间(申请一块内存中空闲的空间),用来存储当前的实例对象
+			2. 把this设置为当前的实例对象
+			3. 初始化属性和方法的值
+			4. 返回实例对象
+
+		*/
+		// function Person(name){
+		// 	this.name=name;
+		// }
+		// var per = new Person('小甜甜')
+
+
+
+
+
 	</script>
 </body>
 

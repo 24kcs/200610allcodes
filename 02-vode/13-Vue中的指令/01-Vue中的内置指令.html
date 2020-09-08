@@ -13,12 +13,30 @@
 <body>
 
 	<div id="app">
-		<p>显示结果:{{content}}</p>
-		<p v-text="content"></p>
-		<a v-html="content">百度</a>
+		<!--插值-->
+		<p>{{msg}}</p>
+		<!--v-text指令同样可以实现,相当于DOM中innerText或者textContent-->
+		<p v-text="msg"></p>
+		<!--v-html指令相当于DOM中的innerHTML-->
+		<p v-html="msg"></p>
+
 	</div>
 	<script type="text/javascript">
-
+		/*
+		
+			内置指令:(vue.js系统自带的)
+			v-bind
+			v-on
+			v-model
+			v-if(v-else,v-else-if)
+			v-show
+			v-for
+			v-text
+			v-html
+			自定义指令:自己定义的指令
+		
+		
+		*/
 		/**
 		 * 
 		 * 指令的作用:就是操作标签
@@ -27,14 +45,15 @@
 		 * ref:为某个元素注册一个唯一的标识,vue对象通过$refs.这个属性值即可访问该元素对象
 		 * 
 		 * 
-		*/
+		 */
 
-		const vm = new Vue({
-			el:'#app',
-			data:{
-				content:'<a href="http://www.baidu.com">百度</a>'
-			}
-		})
+	
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			msg:'<a href="http://www.baidu.com">百度</a>'
+		}
+	})
 	</script>
 </body>
 

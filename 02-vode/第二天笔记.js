@@ -49,7 +49,24 @@
  * 计算属性:computed,
  * 监视:watch,
  * 
+ * cmd命令窗口中
+ * node -v 版本
+ * npm -v 版本
+ * https://github.com/vuejs/vue-cli/tree/v2#vue-cli--
+ * 安装脚手架的命令工具
+ * npm install -g vue-cli
+ * vue -V 版本
  * 
+ * 以上 都是在cmd中执行的
+ * 找到一个合适的目录中,打开命令窗口,进行下载操作
+ * 下载脚手架对应的vue的项目(模版)
+ * vue init webpack 项目名字
+ * 
+ * npm run dev  运行项目
+ * 
+ * npm run build 打包项目---将来在公司中开发完毕项目后,需要上线的时候,你的同事找你要的打包文件
+ * 
+ * serve dist 运行打包文件
  * 
  * 
  * 

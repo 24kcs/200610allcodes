@@ -16,19 +16,14 @@
 </head>
 
 <body>
-	<!-- <div id="app">
-		<p v-upper-text="msg"></p>
-		<p v-lower-text="msg"></p>
-	</div>
-	<div id="app2">
-		<p v-upper-text="msg"></p>
-	</div> -->
 	<div id="app">
 		<p v-upper-text="msg"></p>
 		<p v-lower-text="msg"></p>
 	</div>
+
 	<div id="app2">
-		<p v-upper-text="msg"></p>
+		<p v-upper-text="msg1"></p>
+		<p v-lower-text="msg1"></p>
 	</div>
 	<script type="text/javascript">
 		/**
@@ -52,27 +47,34 @@
 		 */
 
 
-		// 全局指令
-			Vue.directive('upper-text',function(el,binding){
-				el.textContent = binding.value.toUpperCase()
-			});
-			const vm = new Vue({
-				el:'#app',
-				data:{
-					msg:'what Are You no Sha lei'
-				},
-				directives: {
-					'lower-text'(el,binding){
-						el.innerHTML=binding.value.toLowerCase()
-					}
+		// 需求1:通过自定义的指令,可以实现数据都变成大写的方式进行展示
+		// 需求2:通过自定义的指令,可以实现数据都变成小写的方式进行展示
+		// 自己定义的指令,是不能有v-开头的,但是,使用的时候,需要加上v-开头
+		// 全局指令的定义
+		Vue.directive('upper-text', function (el, binding) {
+			// console.log(binding)
+			el.innerHTML = binding.value.toUpperCase()
+		})
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				msg: 'What Are you no Sha lei'
+			},
+			// 局部的自定义指令
+			directives: {
+				'lower-text'(el, binding){
+					el.innerHTML = binding.value.toLowerCase()
 				}
-			});
-			const vm2 = new Vue({
-				el:'#app2',
-				data:{
-					msg:'what Are You no Sha lei'
-				}
-			})
+			}
+		});
+
+		const vm2 = new Vue({
+			el:'#app2',
+			data:{
+				msg1: 'What Are you no Sha lei'
+			}
+		})
+
 
 	</script>
 </body>

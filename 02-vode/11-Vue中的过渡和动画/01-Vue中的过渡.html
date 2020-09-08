@@ -11,38 +11,87 @@
 	<style type="text/css">
 		/* 过渡的样式 */
 
-		.fade-enter-active,
-		.fade-leave-active{
+		/* .fade-enter-active,
+		.fade-leave-active {
 			transition: all .5s;
 		}
+
+		.fade-enter,
+		.fade-leave-to {
+			opacity: 0;
+		} */
+
+
+
+
+		/*
+		过渡效果无非就是从隐藏到显示,从显示到隐藏,有一些淡入淡出的效果,通过css来实现
+
+		从隐藏到显示,三个阶段
+		.fade-enter  开始阶段
+		.fade-enter-active 过渡阶段
+		.fade-enter-to  结束阶段
+
+		从显示到隐藏,三个阶段
+		.fade-leave  开始阶段
+		.fade-leave-active 过渡阶段
+		.fade-leave-to 结束阶段
+
+
+		*/
+		/* 从隐藏到显示所需要的三个类样式 */ 
+		/* .fade-enter{
+
+		}
+		.fade-enter-active{
+
+		}
+		.fade-enter-to{
+
+		} */
+
+		/* 从显示到隐藏所需要的三个类样式 */
+		/* .fade-leave{
+
+		}
+		.fade-leave-active{
+
+		}
+		.fade-leave-to{
+
+		} */
+
+
 		.fade-enter,
 		.fade-leave-to{
-			opacity: 0;
+			opacity:0;
 		}
+
+		.fade-enter-active,
+		.fade-leave-active{
+			transition: all 5s;
+		}
+
+
+
 	</style>
 </head>
 
 <body>
 	<div id="app">
-
-		<!-- <button @click="isOk=!isOk">切换效果</button>
+		<button @click="isOk=!isOk">切换效果展示</button>
 		<transition name="fade">
-				<p v-show="isOk">我是一个p标签</p>
-		</transition> -->
-		<button @click="isOk=!isOk">切换效果</button>
-		<transition name="fade" >
-			<p v-show="isOk">我是一个p标签</p>
+			<p v-show="isOk">哈哈,我又变帅了</p>
 		</transition>
-		
+	
 	</div>
-
 	<script type="text/javascript">
-	const vm = new Vue({
-		el:'#app',
-		data:{
-			isOk:false
-		}
-	})
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				isOk: false
+			}
+		})
 	</script>
 </body>
 
