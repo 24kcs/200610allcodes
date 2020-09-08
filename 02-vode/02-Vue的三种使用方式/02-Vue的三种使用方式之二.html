@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <!--第二种:github搜索Vue,然后找到源码,找到里面的dist目录,下载里面的vue.js文件,通过本地引入:-->
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <input type="text" v-model="msg2" />
+    <p>{{msg2}}</p>
+  </div>
+  <script type="text/javascript">
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '我喜欢男人,华哥说',
+        msg2: '真开心'
+      }
+    });
+  </script>
+</body>
+
+</html>

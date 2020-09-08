@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--双向数据绑定指令,v-model="表达式",一般用在表单标签中-->
+    <input type="text" v-model="msg" />
+    <p>{{msg}}</p>
+    <a v-bind:href="url">百度</a>
+  </div>
+  <script type="text/javascript">
+    // 需求: 文本框中输入内容后,p标签中的内容会随时自动的变化
+
+    const vm = new Vue({
+      el:'#app',
+      data:{
+        msg:'今天中午吃的很舒服啊',
+        url:'http://www.baidu.com'
+      }
+    });
+    
+    
+    /*
+      双向数据绑定
+      指令:   v-model="表达式"
+      一般用在表单标签中,相当于:value和input事件的配合
+    
+    
+    */
+
+
+    /*
+    
+      模版语法:实际上是在html容器中的html模版中进行数据的操作,需要使用一些特殊的语法,实现相应的效果
+      插值:在html中使用{{表达式}},一般用在成对的html标签中间比较多
+
+      强制数据绑定指令: v-bind:属性="表达式",一般用在普通的标签和表单标签上,通常情况对于标签的样式的操作,使用的也非常多
+        v-bind指令,可以简化写法,
+          :属性名字="表达式",这种方式,推荐,使用率很高
+
+      事件绑定指令: v-on:事件名字="回调函数",一般用在需要事件的标签上
+        v-on指令,可以简化写法,
+          @事件名字="回调函数",这种方式,推荐,使用率很高
+
+      双向数据绑定指令: v-model="表达式",一般用在表单标签上比较多
+
+      总结: 在Vue中,如果看到v-开头,几乎都是指令
+      v-on绑定的事件的时候对应的回调函数的位置,不一定是回调函数,也有可能是表达式(该回调函数内部的代码很少,可能只有一行,此时可以直接使用这种方式)
+    
+    
+    
+    */
+  </script>
+</body>
+
+</html>

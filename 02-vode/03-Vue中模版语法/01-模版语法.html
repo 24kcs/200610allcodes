@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--插值语法:-->
+    <p>{{msg}}</p>
+    <p>{{msg.toUpperCase()}}</p>
+    <p>{{msg.split(' ').reverse().join(' ')}}</p>
+    <hr>
+    <!--强制数据绑定:标签上的一些属性的值能够动态的进行操作,但是需要Vue中的指令来实现-->
+    <!--v-bind指令,强制数据绑定的指令,可以用来为某个属性动态的绑定数据-->
+    <input type="text" v-bind:value="val" />
+    <p v-bind:text="tt">这是一个p标签</p>
+    <!--强制数据绑定的这个指令的简写方式:     :属性名字="表达式"-->
+    <p :text="tt">这是一个p标签</p>
+    <hr>
+    <!--绑定事件监听,v-on:事件名字="回调函数"-->
+    <button v-on:click="showMsg1">华哥说:</button>
+    <button v-on:click="showMsg2">静哥说:</button>
+    <button v-on:click="showMsg3">超哥说:</button>
+    <hr>
+    <!--绑定事件监听的简写方式:  @事件名字="回调函数"  -->
+    <button @click="showMsg4">一个小故事</button>
+
+
+    <!--Vue中如何获取DOM元素-->
+    <!--点击按钮,修改p标签中的内容-->
+    <hr>
+    <button @click="changeEat">改变p标签中的内容</button>
+    <p ref="p1">{{eatText}}</p>
+
+
+  </div>
+  <script type="text/javascript">
+
+    // 实例化Vue的对象
+    const vm = new Vue({
+      // 根据选择器获取html容器对象
+      el: '#app',
+      // 数据对象
+      data: {
+        msg: 'what Are you No sha Lei',
+        val: '真开心',
+        tt: '这是一个p',
+        eatText:'今天中午吃什么呢'
+      },
+      // 放的都是方法
+      methods: {
+        // 点击按钮的时候的回调函数(第一个按钮)
+        showMsg1: function () {
+          // this是Vue的实例对象
+          console.log('我喜欢吃榴莲浇臭豆腐汁', this)
+        },
+        // 点击按钮的时候对应的回调函数(第二个按钮)
+        showMsg2: () => {
+          // this是window对象
+          console.log('我喜欢吃大蒜配榴莲', this)
+        },
+        // 点击按钮的时候对应的回调函数(第三个按钮)-----推荐的写法
+        showMsg3() {
+          // this是Vue对象
+          console.log('我那天看到了华哥在洗澡', this)
+        },
+        showMsg4(){
+          console.log('冰箱和冰激淋吵架了,冰激淋离家出走,化了,后悔了,于是乎回来找冰箱,开门说:上来吧,自己冻')
+        },
+        changeEat(){
+          // this----Vue的实例对象
+          // console.log('今天中午吃米饭')
+          // 在Vue中如何获取DOM元素
+          this.$refs.p1.innerHTML='今天中午吃面'
+          // 只要在Vue中看到了$开头的东西,几乎都是实例对象来使用的
+        }
+      }
+    });
+
+
+    /*
+        强制数据绑定:
+        为什么要有强制数据绑定? Vue搭建界面,离不开操作html标签,标签就有属性,属性中的值如果是动态的,那么操作起来会非常的方便,但是有很多的属性就是普通的标签的普通的属性,希望普通的属性中的数据也可以是动态的
+
+        强制数据绑定的解释:标签上的一些属性的值能够动态的进行操作,但是需要Vue中的指令来实现
+        如何使用强制数据绑定；
+        Vue中的指令； 在标签上如果看到了v-开头的,一般都是Vue的指令
+        强制数据绑定的指令:  v-bind
+
+        强制数据绑定语法：
+         v-bind:属性名字="表达式"
+        注意: 一般该属性的值需要动态的进行操作,需要使用v-bind指令,一般都是普通的标签上的属性使用v-bind指令比较多
+        html标签:表单标签和普通标签
+
+        强制数据绑定的指令:    v-bind:属性名字="表达式"   也可以简写    :属性名字="表达式"
+        html标签中的属性需要存储动态的值,此时在Vue中使用v-bind指令即可解决
+        指令: Vue中只要是在标签中看到了v-开头的都叫指令
+
+
+        绑定事件监听:
+        指令:
+        v-on:事件名字="回调函数"
+        事件名字:   原来DOM中书写 ----> onclick="" 在Vue中书写:    v-on:click="回调函数"  把DOM中的on干掉,然后的名字都是小写的
+        回调函数的书写:
+        需要在methods对象中进行书写,同时书写方式:
+          方式1:  clickHandle1:function(){}
+          方式2:   clickHandle2:()=>{}
+          方式3:   clickHandle3(){}   推荐的写法
+
+        绑定事件监听指令,可以简写  ----->   @事件名字="回调函数"   -----使用率很高
+
+    */
+
+
+
+
+  </script>
+</body>
+
+</html>

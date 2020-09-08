@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<fieldset>
+			<legend>数组数据更新操作</legend>
+			<button @click="addPerson">添加一个数据</button><br />
+			姓名: <input type="text" v-model="name" /><br />
+			年龄: <input type="text" v-model="age" /><br />
+			描述: <input type="text" v-model="desc" /><br />
+			<hr>
+			<ul>
+				<li v-for="(per,index) in persons" :key="per.id">
+					索引:{{index}}---姓名:{{per.name}}---年龄:{{per.age}}---描述:{{per.desc}}
+					----
+					<button @click="delPerson(index)">删除</button>----
+					<button @click="updatePerson(index,{id:++perId,name,age,desc})">修改</button>
+				</li>
+			</ul>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+		const vm = new Vue({
+			// 根据选择器获取对应的html容器对象
+			el: '#app',
+			// 数据对象
+			data: {
+				name: '', // 用来收集名字的
+				age: '', // 用来收集年龄的
+				desc: '', // 用来收集描述的
+				perId: 10,
+				persons: [
+					{ id: 1, name: '卡卡西', age: 31, desc: '一个很帅的男人' },
+					{ id: 2, name: '佐助', age: 31, desc: '一个很酷的男人' },
+					{ id: 3, name: '鸣人', age: 31, desc: '一个很天真的男人' },
+					{ id: 4, name: '雏田', age: 31, desc: '一个很痴情的女孩子' },
+					{ id: 5, name: '纲手', age: 31, desc: '一个很大气的女孩子' }
+				]
+			},
+			// 存放回调函数/方法
+			methods: {
+				// 添加操作的回调函数
+				addPerson() {
+					// 先获取收集到的数据
+					// console.log(this.name,this.age,this.desc)
+					// 解构赋值
+					const { name, age, desc } = this
+
+					// 定义人的对象
+					const per = {
+						id: ++this.perId,
+						name,
+						age,
+						desc
+					}
+					// 把对象添加到数组中
+					this.persons.push(per)
+					// 清空文本框数据
+					this.name = ''
+					this.age = ''
+					this.desc = ''
+				}, // end addPerson
+				// 删除某个数据,根据索引的方式
+				delPerson(index) {
+					// 从数组中把这个索引对应的数据移除即可
+					this.persons.splice(index, 1)
+				}, // end delPerson
+
+				// 修改数据操作
+				updatePerson(index, per) {
+					this.persons[index].id = per.id
+					this.persons[index].name = per.name
+					this.persons[index].age = per.age
+					this.persons[index].desc = per.desc
+				}
+			}
+		});
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<h2>表单数据绑定操作</h2>
+		<form action="xxx/" method="post">
+			<fieldset>
+				<legend>帐号和密码</legend>
+				<!--在文本框中添加一个v-model-->
+				用户名: <input type="text" v-model="userInfo.name"><br />
+				密码: <input type="password" v-model="userInfo.pwd"><br />
+			</fieldset>
+			<fieldset>
+				<legend>性别选择器</legend>
+				<input type="radio" name="gender" value="男" v-model="userInfo.gender" />男
+				<input type="radio" name="gender" value="女" v-model="userInfo.gender" />女
+
+			</fieldset>
+			<fieldset>
+				<legend>爱好选择</legend>
+				<input type="checkbox" value="eat" v-model="userInfo.hobby" />吃饭
+				<input type="checkbox" value="sleep" v-model="userInfo.hobby" />睡觉
+				<input type="checkbox" value="play" v-model="userInfo.hobby" />打豆豆
+			</fieldset>
+			<fieldset>
+				<legend>城市选择和文本内容</legend>
+				<select v-model="userInfo.cityId">
+					<optgroup label="中国">
+						<option :value="item.id" v-for="(item,index) in userInfo.cities" :key="item.id">{{item.name}}</option>
+				
+					</optgroup>
+				</select>
+				<br />
+				<textarea v-model="userInfo.text" name="" id="" cols="80" rows="5">哈哈</textarea>
+			</fieldset>
+			<input type="submit" value="注册" @click.prevent="register">
+		</form>
+	</div>
+	<script type="text/javascript">
+
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				userInfo: {
+					name: '', // 帐号
+					pwd: '', // 密码
+					gender: 0, // 性别
+					hobby: ['eat', 'play'],
+					cityId:5,
+					cities: [
+						{ id: 1, name: '北京市' },
+						{ id: 2, name: '上海市' },
+						{ id: 3, name: '重庆市' },
+						{ id: 4, name: '天津市' },
+						{ id: 5, name: '首尔市' },
+						{ id: 6, name: '东京市' }
+					],
+					text:'今天中午吃什么'
+				}
+			},
+			methods: {
+				register() {
+					console.log(this.userInfo.name, this.userInfo.pwd)
+				}
+			}
+		})
+
+	</script>
+</body>
+
+</html>

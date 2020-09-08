@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<h2>1.事件监听</h2>
+	
+		<button @click="showMsg1('哈哈,我喜欢华哥')">强哥说:</button>
+		<button @click="showMsg2('我喜欢铭哥',$event)">华哥说:</button>
+		<button @click="showMsg3($event)">静哥说:</button>
+		<button @click="showMsg4">超哥说:</button>
+	</div>
+	<script type="text/javascript">
+	const vm = new Vue({
+		el:'#app',
+		data:{
+
+		},
+		methods: {
+			showMsg1(text){
+				console.log(text)
+			},
+			// 事件参数对象
+			showMsg2(text,event){
+				console.log(text,event)
+			},
+			showMsg3(event){
+				console.log(event)
+			},
+			showMsg4(event){
+				console.log(event)
+			}
+		}
+	})
+
+
+
+		/**
+			 *
+			 * @click="showMessage2($event)" 括号中直接可以传入事件参数对象,$event是固定写法
+			 * 传入的事件参数的位置,一定是在后面
+			 *
+			 *
+			 *
+			 */
+
+            //如果想要在Vue实例对象的某些相关方法中使用到事件参数对象(前提是在html模版中已经传了其他的参数了,或者没有传,但是还要想使用事件参数对象)就需要在html模版中的某个事件的回调函数中传入$event
+            //此时在方法中进行接收该参数,可以直接使用该事件参数对象
+	</script>
+</body>
+
+</html>

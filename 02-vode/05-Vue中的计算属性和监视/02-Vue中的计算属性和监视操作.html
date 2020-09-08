@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>每天都被自己帅醒!</title>
+  <link rel="stylesheet" href="">
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <fieldset>
+      <legend>姓名操作</legend>
+      姓氏:
+      <input type="text" placeholder="请输入姓名" v-model="firstName"><br />
+      名字:
+      <input type="text" placeholder="请输入名字" v-model="lastName"><br />
+    </fieldset>
+    <fieldset>
+      <legend>单向和双向操作</legend>
+      姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br />
+      姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName2"><br />
+      姓名(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br />
+    </fieldset>
+  </div>
+  <script type="text/javascript">
+
+    const vm = new Vue({
+      // 根据选择器获取html的容器对象
+      el: '#app',
+      // 数据对象
+      data: {
+        firstName: '东方',
+        lastName: '不败',
+        fullName2: '', // 第二个文本框所需要的数据,姓名
+      },
+      // 计算属性
+      computed: {
+        // get操作
+        fullName1() {
+          return this.firstName + '_' + this.lastName
+        },
+        // 当前fullName3这个计算属性的完整写法
+        // 如果当前的计算属性有get,也有set,说明这个计算属性fullName3既可以获取值,也可以修改值
+        fullName3: {
+          // 外部如果要获取fullName3属性值的时候,会自动的进入到get中
+          get() {
+            return this.firstName + '_' + this.lastName
+          },
+          // 如果当前的这个属性仅仅是获取数据,而不需要设置数据,那么set可以省略,
+          // 如果set省略,此时内部只有get了,那么,就可以简化成fullName1的计算属性的形式了
+          set(val) {
+            // 外部要修改fullName3属性值的时候,就会进入到当前的set中,val这个参数就是外部所赋的值
+            // console.log(val)
+            const names = val.split('_');
+            this.firstName = names[0];
+            this.lastName = names[1];
+
+          }
+        }
+      },
+      // 监视
+      watch: {
+        // val 就是firstName属性的值
+        firstName(val) {
+          // 立刻的改变fullName2属性的值
+          this.fullName2 = val + '_' + this.lastName
+        },
+        // lastName(val) {
+        //   this.fullName2 = this.firstName + '_' + val
+        // }
+      }
+
+    });
+
+    // 可以通过实例对象调用监视的方法,从而实现相关的需求
+    vm.$watch('lastName', function (val) {
+      this.fullName2 = this.firstName + '_' + val
+    })
+
+
+    /*
+
+     计算属性: 无非就是某个属性的值发生了变化,相关联的属性的数据值也会自动的发生变化
+
+     监视:就是某个数据发生变化,需要做一些事情
+
+      什么时候使用计算属性，只要是涉及到关联属性的值变化了
+      什么时候使用监视,只要是数据变化,需要做一些事情
+     总结: 计算属性对象和监视对象的区别
+     计算属性是在配置对象中进行设置的,监视可以在配置对象中设置也可以通过Vue的实例对象进行设置(表面区别)
+     深入的区别:分析了Vue的源码和Vue的前台项目讲解的过程中.
+
+
+     计算属性的写法:
+     方式1: 涉及到有读和写的操作,有设置,也有获取操作
+     计算属性名字:{
+        get(){},
+        set(){}
+     }
+     方式2:只有读或者说只有获取的操作
+     计算属性名字(){}  就是get的写法
+
+
+     Vue中的全局方法或者全局属性  和实例方法或者实例属性有个非常明显的区别
+     只要是看见$开头,都属于Vue实例对象的
+     如果没有$开头,一般都属于Vue的
+
+
+
+    */
+  </script>
+</body>
+
+</html>

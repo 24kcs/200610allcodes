@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<fieldset>
+			<legend>数据排序及相关操作</legend>
+			<input type="text" v-model="searchName" />
+			<ul>
+				<li v-for="(per,index) in personArr" :key="per.id">
+					索引:{{index}}---id:{{per.id}}---名字:{{per.name}}---年龄:{{per.age}}
+				</li>
+			</ul>
+			<button @click="state=1">升序</button>
+			<button @click="state=2">降序</button>
+			<button @click="state=0">原序</button>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				searchName: '', // 用来获取文本框中输入的数据
+				state: 0, // 默认值是0,表示的是原来的顺序,如果1,则升序,如果2,则是降序
+				persons: [
+					{ id: 1, name: 'jack', age: 28 },
+					{ id: 3, name: 'tom', age: 49 },
+					{ id: 5, name: 'lucy', age: 15 },
+					{ id: 7, name: 'rousi', age: 69 },
+					{ id: 9, name: 'alibaba', age: 97 }
+				]
+			},
+			computed: {
+				personArr() {
+
+
+					// 获取文本框中输入的数据
+					const { searchName, persons, state } = this
+					// 从persons数组中遍历每条数据和searchName中存储的数据,进行筛选的操作(过滤的操作)
+					// 定义一个新的数组,并且把这个新的数组的数据塞进personArr数组
+					const arr = persons.filter(item => item.name.indexOf(searchName) !== -1)
+					if (state !== 0) {
+						arr.sort((p1, p2) => {
+							return state === 2 ? p2.age - p1.age : p1.age - p2.age
+						})
+					}
+					return arr
+				}
+			}
+		})
+
+
+
+	</script>
+</body>
+
+</html>

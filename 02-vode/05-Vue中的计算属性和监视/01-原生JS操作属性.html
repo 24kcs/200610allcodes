@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // 需求:在某个对象中,某个属性的值改变,相关联的属性的值会自动发生改变----vue中的计算属性
+
+    // 定义一个对象
+    const person = {
+      firstName: '东方', // 姓氏
+      lastName: '不败' // 名字
+    };
+
+    // 通过Object.defineProperty()方法为对象添加属性
+    // 参数1: 要为哪一个对象添加属性,那么这个对象就是第一个参数
+    // 参数2: 要添加的这个属性名字,是字符串类型的
+    // 参数3: 配置对象,用来对添加的属性做具体的设置(该属性是否可以被删除,属性的默认值,值师傅可以改变,是否可以设置get和set)
+    Object.defineProperty(person, 'fullName', {
+      configurable: false, // 默认是false,该属性不能被删除
+      enumerable: false, // 默认是false,该属性是否可以被枚举遍历
+      // value:'哈_哈', // 该属性的默认值
+      // writable:true, // 默认是false,该属性的值是否可以被修改
+      // 如果在当前的配置对象中设置了value和writable,那么就不要设置get或set
+      // 当在外面通过person.fullName来获取该属性的值的时候,会自动的进入到当前的get方法中
+      // get方法的作用是用来获取该属性的值的
+      get() {
+        // return 后面的结果会直接塞进fullName属性中
+        return this.firstName + '_' + this.lastName
+      },
+      // 当在外面通过person.fullName='值'来设置该属性的值的时候,会自动的进入到当前的set方法中
+      // set方法的作用是用来为该属性的值进行赋值操作的
+      set(val) { 
+        const names = val.split('_');
+        this.firstName = names[0]; // 姓氏
+        this.lastName = names[1]; // 名字
+      }
+    });
+
+
+    // 显示姓名
+    // js本身是一门动态类型的语言,所以,对象没有什么,只需要点一下,该对象就有了这个属性,但是,该属性和对象中其他的属性没有真正的关联关系(某个属性的值发生变化,当前的这个属性的值不会自动的发生变化)
+    person.fullName = person.firstName + '_' + person.lastName;
+    console.log(person.fullName);
+    // 修改姓氏和名字
+    person.firstName = '西门';
+    person.lastName = '华哥';
+    // 结果没有改变
+    console.log(person.fullName);
+    // 改变姓名
+    person.fullName = '诸葛_孔明';
+    console.log(person.firstName);
+    console.log(person.lastName);
+
+
+  </script>
+</body>
+
+</html>

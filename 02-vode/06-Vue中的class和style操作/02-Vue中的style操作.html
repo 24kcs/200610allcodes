@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+
+
+</head>
+
+<body>
+	<div id="app">
+		<fieldset>
+			<legend>style操作:style中书写的时候有多个值,采用对象写法</legend>
+			<p :style="{color:myColor,backgroundColor:bgColor}">华哥</p>
+		</fieldset>
+		<fieldset>
+			<legend>style操作:动态操作设置键值,采用数组写法,数组中的每一项都是键值对</legend>
+			<p :style="[myColor1,myColor2]">努力拼搏</p>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				myColor:'green',
+				bgColor:'red',
+				myColor1:{
+					color:'blue'
+				},
+				myColor2:{
+					backgroundColor:'yellow',
+					fontSize:'50px'
+				}
+			}
+		});
+
+		// MVVM
+
+
+
+		/**
+		 * Vue中style属性操作标签的样式的方式:
+		 * 1) 键值对的方式:----> :style="{color:fontColor,fontSize:fontSize}"
+		 * 2) 数组的方式:-----> :style="[fontColor1,fontSize2]"
+		 *
+		 *
+		 */
+
+	</script>
+</body>
+
+</html>

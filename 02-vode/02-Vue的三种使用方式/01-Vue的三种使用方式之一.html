@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <!--引入Vue文件的第一种方式:通过在线的BootCDN的方式-->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+  <!--HTML容器-->
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script type="text/javascript">
+    // 实例化Vue的对象的同时进行初始化操作(小括号中的{}可以叫配置对象---专门做配置操作的)
+    const vm = new Vue({
+      // el------>element---->元素,'#app'------->选择器
+      // 根据id选择器获取HTML中的容器
+      el:'#app',
+      // 数据对象
+      data:{
+        msg:'日照香炉生紫烟,要看华哥在林间'
+      }
+    });
+
+
+
+    // function Person(name,age){
+    //   this.name= name;
+    //   this.age = age;
+    // }
+    // // 实例化对象
+    // var per = new Person()
+    // // 实例化对象的同时进行初始化(属性有初始值)
+    // var per2 = new Person('卡卡西',20)
+  </script>
+
+</body>
+
+</html>
