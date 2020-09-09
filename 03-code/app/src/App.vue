@@ -1,9 +1,9 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header/>
-      <List/>
-      <Footer/>
+      <Header :addTodo="addTodo" />
+      <List :todos="todos" :deleteTodo="deleteTodo" :toggleTodo="toggleTodo" />
+      <Footer :todos="todos" :checkAllTodos="checkAllTodos" />
     </div>
   </div>
 </template>
@@ -17,15 +17,43 @@ import Footer from './components/Footer'
 export default {
   name: 'App',
   // 注册组件
-  components:{
+  components: {
     Header,
     List,
-    Footer
-  }
+    Footer,
+  },
+  data() {
+    return {
+      todos: [
+        { id: 1, title: '中岛美雪', isCompleted: false },
+        { id: 2, title: '滨崎步', isCompleted: true },
+        { id: 3, title: '花泽香菜', isCompleted: false },
+      ],
+    }
+  },
+  methods: {
+    // 添加数据的方法
+    addTodo(todo) {
+      this.todos.unshift(todo)
+    },
+    // 根据索引来删除数据
+    deleteTodo(index) {
+      this.todos.splice(index, 1)
+    },
+    // 设置当前的数据是否被选中
+    toggleTodo(todo) {
+      todo.isCompleted = !todo.isCompleted
+    },
+    // 设置全选或者全不选
+    checkAllTodos(isChecked) {
+      this.todos.forEach((todo) => {
+        todo.isCompleted = isChecked
+      })
+    },
+  },
 }
 </script>
 <style scoped>
-
 /*app*/
 .todo-container {
   width: 600px;

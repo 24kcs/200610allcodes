@@ -1,15 +1,66 @@
 <template>
-  <li>
+  <li
+    @mouseenter="mouseHandle(true)"
+    @mouseleave="mouseHandle(false)"
+    :style="{color:myColor,backgroundColor:bgColor}"
+  >
     <label>
-      <input type="checkbox" />
-      <span>xxxxx</span>
+      <input type="checkbox" v-model="isChecked" />
+      <span>{{todo.title}}</span>
     </label>
-    <button class="btn btn-danger" style="display:none">删除</button>
+    <button class="btn btn-danger" v-show="isShow" @click="del">删除</button>
   </li>
 </template>
 <script>
 export default {
   name: 'Item',
+  props: {
+    todo: Object, // 传递过来的todo的数据的类型必须是对象
+    deleteTodo:Function,
+    index:Number,
+    toggleTodo:Function
+  },
+  data() {
+    return {
+      myColor: 'black', // 前景色
+      bgColor: 'white', // 背景色
+      isShow:false // 控制按钮的显示或者隐藏
+    }
+  },
+  computed: {
+    isChecked:{
+      get(){
+        return this.todo.isCompleted
+      },
+      set(){
+        this.toggleTodo(this.todo)
+      }
+    }
+  },
+  methods: {
+    // 鼠标进入和离开事件的回调函数
+    mouseHandle(flag) {
+      // 判断是鼠标进入还是离开
+      if (flag) {
+        // 进入
+        this.myColor = 'green'
+        this.bgColor = 'pink'
+        this.isShow = true
+      } else {
+        // 离开
+         this.myColor = 'black'
+        this.bgColor = 'white'
+        this.isShow = false
+      }
+    },
+    // 删除当前这一条数据
+    del(){
+      // 友好的提示
+      if(window.confirm('确定要删除吗?')){
+        this.deleteTodo(this.index)
+      }
+    }
+  },
 }
 </script>
 <style scoped>
@@ -36,7 +87,7 @@ li label li input {
 
 li button {
   float: right;
-  display: none;
+  /* display: none; */
   margin-top: 3px;
 }
 
