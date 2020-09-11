@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // 自己定义的构造函数
+    function Person() { }
+    Person.prototype.$emit = function () {
+      console.log('分发事件')
+    };
+    Person.prototype.$on = function () {
+      console.log('绑定事件')
+    };
+    // 构造函数
+    function Student() { }
+    // 改变原型指向
+    Student.prototype = new Person();
+    // 构造函数
+    function SmallStudent() { }
+    // 改变原型指向
+    SmallStudent.prototype = new Student();
+    SmallStudent.prototype.showMsg = function () {
+      console.log('我是Header')
+    }
+    const stu = new SmallStudent();
+    stu.$on()
+    stu.$emit()
+  </script>
+</body>
+
+</html>

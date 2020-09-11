@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // 何为原型?
+    /*
+      原型是对象,
+      原型有显示原型和隐式原型
+      显示原型:prototype,浏览器的标准属性,给程序员用的,是对象
+      隐式原型:__proto__,浏览器的非标准属性,给浏览器用的,是对象
+
+      为什么要有原型:
+      实现数据共享,为了节省内存空间,以及实现原型
+
+      对象可以点属性,也可以点方法
+    
+    
+    
+    */
+
+    // 构造函数
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    Person.prototype.eat = function () {
+      console.log('华哥喜欢吃臭豆腐浇榴莲汁')
+    }
+
+    function Student(){}
+    // 指向改变
+    Student.prototype = new Person()
+    var stu = new Student()
+
+    var p1 = new Person('华哥', 47);
+    var p2 = new Person('华哥', 47);
+    // 多个相同类型的对象调用的是相同的方法,此时如果方法定义在构造函数内部,那么浪费内存空间
+    // 所以,可以通过原型的方式来解决此浪费内存空间问题
+    // 如何解决:把该方法/函数,定义在该Person构造函数的原型上
+    console.log(p1.eat === p2.eat)
+
+    stu.eat()
+
+
+  </script>
+</body>
+
+</html>
