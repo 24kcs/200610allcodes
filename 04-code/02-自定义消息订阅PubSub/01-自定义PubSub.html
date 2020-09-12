@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script src="./PubSub.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // 订阅消息
+    var token1 = PubSub.subscribe('add', (data) => {
+      console.log('add消息订阅了1', data)
+    });
+    var token2 = PubSub.subscribe('add', (data) => {
+      console.log('add消息订阅了2', data)
+    });
+    var token3 = PubSub.subscribe('del', (data) => {
+      console.log('del消息订阅了1', data)
+    });
+
+    // 取消订阅
+    // 根据token标识来取消消息订阅
+    // PubSub.unsubscribe(token2)
+    // 全都取消
+    // PubSub.unsubscribe()
+    // 根据消息名字取消消息订阅
+    PubSub.unsubscribe('add')
+
+
+
+
+
+    // 发布消息
+    PubSub.publish('add', '123'); // 异步发布消息
+    // PubSub.publishSync('add', '123'); // 同步发布消息
+
+    PubSub.publishSync('del', '100'); // 同步发布消息
+
+
+  </script>
+</body>
+
+</html>
