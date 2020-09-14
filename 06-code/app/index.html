@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>app</title>
+    <!--引入基本的样式文件-->
+    <!--路由在跳转的时候,路由链接的地址会发生变化,此时如果css引入是相对路径,很有可能是相对于某个路由的地址去找样式文件,此时样式有可能会出现问题,所有,一旦有路由相关的操作,样式引入建议使用绝对路径-->
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <style>
+      /* 当前的路由链接被选中了 */
+      .router-link-active{
+        color:red !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+
+
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <input type="text" v-model="msg">
+    <a :href="url">百度</a>
+    <button @click="showMsg">按钮</button>
+  </div>
+  <script type="text/javascript">
+
+    const vm = new Vue({
+      el:'#app',
+      data:{
+        msg:'真香啊',
+        url:'http://www.baidu.com'
+      },
+      methods:{
+        showMsg(){
+          this.msg='真好吃'
+        }
+      }
+    })
+
+
+
+
+
+
+
+  const vm = new Vue({
+    // 根据选择器获取id为app的div
+    el:'#app',
+    // 数据对象,用来定义属性的
+    data:{
+      msg:'哈哈',
+    },
+    // 存放方法的
+    methods:{
+      sayHi(){}
+    },
+    // 监视数据的
+    watch:{},
+    // 界面加载后的生命周期回调
+    mounted(){}
+  })
+
+
+
+
+
+// 对象中有属性和方法
+  // var obj ={
+  //   age:13,
+  //   // 只是因为属性的值是function函数,所以,通常情况把eat叫方法
+  //   eat:function(){},
+  //   name:'小明',
+  //   run:function(){}
+  // }
+
+  // obj.age.play
+  // obj.name
+  // obj.eat()
+
+  // var arr = [10,20,30]; // 数组是对象
+  // // 需求:遍历数组中的每个元素
+  // arr.forEach(item=>{
+  //   console.log(item)
+  // })
+
+
+
+// var per = {
+//   name:'小明',
+//   eat(){},
+//   run(){},
+//   play(){}
+// }
+    
+  </script>
+</body>
+</html>
