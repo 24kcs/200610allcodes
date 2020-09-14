@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+</head>
+
+<body>
+  <div id="demo">
+    <p>华哥喜欢健哥</p>
+    <p>健哥喜欢禹哥</p>
+    <p>禹哥喜欢华哥</p>
+  </div>
+  <script type="text/javascript">
+    // 1.伪数组如何转成 真数组
+    // const divObjs = document.getElementsByTagName('p')
+    // // console.log(divObjs instanceof Array) // 伪数组
+    // const list1 = Array.from(divObjs)
+    // const list2 = [...divObjs]
+    // const list3 = Array.prototype.slice.call(divObjs)
+    // const list4 = [].slice.call(divObjs)
+
+    // console.log(list1 instanceof Array)
+    // console.log(list2 instanceof Array)
+    // console.log(list3 instanceof Array)
+    // console.log(list4 instanceof Array)
+
+
+    // 2.nodeType节点:页面中所有的东西都可以叫节点, 节点,元素,标签
+    // 标签:页面中的html标签 ,元素:标签就叫元素
+    // 节点: 标签,属性,文本
+    // 节点也是有类型,可以通过nodeType属性获取的:1---标签节点,2---属性节点,3---文本节点
+    // 根据id获取节点对象
+    // const divObj = document.getElementById('demo')
+    // console.log(divObj.nodeType)
+    // // 根据属性名字获取节点对象
+    // const attrNode = divObj.getAttributeNode('id')
+    // console.log(attrNode.nodeType)
+    // // 获取文本节点
+    // const txtNode = divObj.firstChild
+    // console.log(txtNode.nodeType)
+
+
+
+
+    // 3. Object.defineProperty()方法---为对象添加属性
+    // const obj = {
+    //   firstName: '东方',
+    //   lastName: '不败'
+    // }
+    // Object.defineProperty(obj, 'fullName', {
+    //   configurable: false, // 默认为false,不能删除该属性
+    //   enumerable: true, // 默认为false,不能被枚举
+    //   // value:'哈_哈',
+    //   // writable:true, // 默认是false , 不能修改属性值
+    //   get() {
+    //     return this.firstName + '_' + this.lastName
+    //   },
+    //   set(val) {
+    //     const names = val.split('_')
+    //     this.firstName = names[0]
+    //     this.lastName = names[1]
+    //   },
+    // })
+    // obj.fullName = obj.firstName + '_' + obj.lastName
+    // console.log(obj.fullName)
+    // obj.fullName = '诸葛_孔明'
+    // console.log(obj.firstName, obj.lastName)
+    // delete obj.fullName
+
+    // delete obj.fullName
+    // 4. Object.keys()方法
+    // const keys = Object.keys(obj)
+    // console.log(keys)
+    // for(var key of keys){
+    //   console.log(key+'-------'+obj[key])
+    // }
+    // for(var key in keys){
+    //   console.log(key+'========='+obj[key])
+    // }
+
+    // 5. 对象.hasOwnProperty()方法,判断当前对象中是否包含这个属性
+    // console.log(obj.hasOwnProperty('fullName'))
+    // console.log(obj.hasOwnProperty('toString'))
+    // console.dir(obj)
+
+
+    // 6. 文档碎片对象模型----DoucmentFragment---(高效的批量处理多个节点)
+    // 要求.通过文档碎片对象,把html标签容器中的内容更新
+
+    // function my$(id){
+    //   return document.getElementById(id)
+    // }
+
+    // 1) 创建文档碎片对象模型
+    const fragment = document.createDocumentFragment()
+    // 2) 获取div中所有的节点
+    // const nodes = my$('demo').getElementsByTagName('p')
+    const divObj = document.getElementById('demo')
+    // 3) 把页面中某些节点全部的放进文档碎片对象中
+    var child;
+    // 循环遍历div中所有的子节点,放进文档碎片对象中
+    while(child=divObj.firstChild){
+      // 相当于 剪切
+      fragment.appendChild(child)
+    }
+
+    // 4) 遍历文档碎片对象中所有的节点,并修改其内容
+    fragment.childNodes.forEach(node=>{
+      node.innerHTML='我没有女朋友'
+    })
+
+    // 5) 把修改后的文档碎片对象扔进某个容器中完成
+    divObj.appendChild(fragment)
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
