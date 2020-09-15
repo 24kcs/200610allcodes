@@ -1,20 +1,26 @@
+// 监视对象的构造函数
 function Watcher(vm, expOrFn, cb) {
-    this.cb = cb;
-    this.vm = vm;
-    this.expOrFn = expOrFn;
-    this.depIds = {};
-
+    this.cb = cb; // 回调函数
+    this.vm = vm; // vm实例对象
+    this.expOrFn = expOrFn; //表达式
+    this.depIds = {}; // 存储depId的键值对对象
+    // 判断当前的表达式是不是一个函数
     if (typeof expOrFn === 'function') {
         this.getter = expOrFn;
     } else {
+        // expOrFn.trim()----'msg'
+        // 传入表达式,并返回一个回调函数(回调函数内部需要一个对象,并且遍历表达式,返回某个值)
         this.getter = this.parseGetter(expOrFn.trim());
     }
-
+    // 监视对象调用get方法的返回值给了value属性
+    // 这个value中存储的是表达式的值
     this.value = this.get();
 }
-
+// 监视对象的原型对象
 Watcher.prototype = {
+    // 构造器
     constructor: Watcher,
+    // 是更新
     update: function() {
         this.run();
     },
@@ -47,7 +53,11 @@ Watcher.prototype = {
         }
     },
     get: function() {
+        // 把当前的监视的实例对象传到了Dep的target属性中
         Dep.target = this;
+        // 调用下面的闭包中的回调函数,返回值给value属性
+        // this.vm改变this的对象
+        // this.vm传入函数所需要的参数
         var value = this.getter.call(this.vm, this.vm);
         Dep.target = null;
         return value;
@@ -59,10 +69,16 @@ Watcher.prototype = {
         var exps = exp.split('.');
 
         return function(obj) {
+            // 循环遍历exps数组中的每个表达式---msg
             for (var i = 0, len = exps.length; i < len; i++) {
+                // 是否传入对象---vm
                 if (!obj) return;
+                // obj=vm[exps[0]]---->obj=vm['msg']
+                // obj=vm.msg
+                // obj最终存储的是表达式的值
                 obj = obj[exps[i]];
             }
+            // 返回该表达式的值
             return obj;
         }
     }

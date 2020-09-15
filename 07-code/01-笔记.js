@@ -341,29 +341,6 @@
   * 
   * 
   * 
-  * Vuex:集中式管理状态数据的一种模式,其实就是一个对象
-  * 作用:Vuex可以实现Vue中任意组件的通信
-  * 内部有5个对象
-  * state:用来存储多个状态数据的对象
-  * mutations:包含了多个直接修改状态数据的方法的对象,同步代码
-  * actions:包含了多个间接修改状态数据的方法的对象,同步/异步
-  * getters:包含了多个状态数据的计算属性的get方法的对象
-  * modules:模块
-  * 使用vuex流程:搭建vuex,最终需要在main.js中注册vuex的store对象
-  * 组件中通过dispatch分发action,action内部通过commit提交mutation,从而实现数据的修改
-  * 组件中获取状态数据:
-  * this.$store.state.xxx
-  * mapState(['xxx'])
-  * 组件中获取状态数据的计算属性的数据
-  * this.$store.getters.xxx
-  * mapGetters(['xxx'])
-  * 组件提交mutation
-  * this.$store.commit('mutation的type')
-  * mapMutations({}/[]),当前的方法名字和mutation的type不一样用{},一样用[]
-  * 组件提交/分发action
-  * this.$store.dispatch('action的名字')
-  * mapActions({}/[]),同上
-  * 
   * 
   * 
   * 
