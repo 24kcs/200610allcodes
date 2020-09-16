@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_模板解析_事件指令</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+</head>
+<body>
+<div id="app">
+  <button v-on:click="showName">按钮</button>
+</div>
+<script type="text/javascript">
+  const vm = new MVVM({
+    el:'#app',
+    data:{
+      name:'小明'
+    },
+    methods: {
+      showName(){
+        console.log(this.name)
+      }
+    }
+  })
+  /*
+
+    面试题: 谈谈你对模版解析的理解(之事件指令)
+    Vue中有模版解析中有事件指令的解析
+     在Vue实例的时候,内部会创建模版解析对象,用来进行模版解析的操作,首先把选择器和当前的vm实例对象传入到解析对象中,内部会先创建文档碎片对象(虚拟DOM),根据选择器获取对应的html容器(id为app的div),把该容器中的所有的节点全部的放在文档碎片对象中,内部遍历文档碎片对象中所有的节点,判断该节点是不是标签,是不是文本,如果不是标签,也不是文本,再判断该节点是不是有子节点,那么就进行递归操作,直到该节点是标签或者该节点是文本节点并且是和插值正则表达式匹配的
+    如果是标签,要获取该标签上所有的属性,判断每个属性是不是指令，然后再判断指令是不是事件指令,如果是事件指令，通过vm获取methods对象中相关的回调函数,最终通过addEventListener()方法绑定事件,最终会把该标签上所有的指令相关的属性全都删掉,从而实现事件指令的解析
+    
+
+
+  
+  
+  */
+
+</script>
+</body>
+</html>

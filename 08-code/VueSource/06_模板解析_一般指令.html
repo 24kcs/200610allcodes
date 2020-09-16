@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>06_模板解析_一般指令</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+  <style type="text/css">
+    .cls {
+      color: red;
+    }
+
+    .cls2 {
+      font-size: 50px;
+    }
+    .cls3{
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- <div id="app">
+    <p v-text="msg"></p>
+  </div> -->
+
+  <!-- <div id="app">
+    <p v-html="msg"></p>
+  </div> -->
+
+  <div id="app">
+    <p v-class="myClass" >真好</p>
+  </div>
+
+ 
+  <script type="text/javascript">
+
+    const vm = new MVVM({
+      el: '#app',
+      data: {
+        myClass:'cls'
+        // msg: '源码真香'
+        // msg: '<a href="http://www.baidu.com">百度</a>'
+      }
+    })
+    /*
+     面试题: 谈谈你对模版解析的理解(之普通指令)
+    Vue中有模版解析中有普通指令的解析
+     在Vue实例的时候,内部会创建模版解析对象,用来进行模版解析的操作,首先把选择器和当前的vm实例对象传入到解析对象中,内部会先创建文档碎片对象(虚拟DOM),根据选择器获取对应的html容器(id为app的div),把该容器中的所有的节点全部的放在文档碎片对象中,内部遍历文档碎片对象中所有的节点,判断该节点是不是标签,是不是文本,如果不是标签,也不是文本,再判断该节点是不是有子节点,那么就进行递归操作,直到该节点是标签或者该节点是文本节点并且是和插值正则表达式匹配的
+
+    如果是标签,要获取该标签上所有的属性,判断每个属性是不是指令，然后再判断指令是不是普通指令,如果是普通指令，通过vm获取该指令中使用的表达式的值,最终调用updater对象中相关的方法实现解析的操作
+    
+    
+    
+    */
+
+
+   
+  </script>
+</body>
+
+</html>

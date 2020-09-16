@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>07_数据劫持-数据绑定</title>
+  <!--
+    1. 数据绑定
+      * 初始化显示: 页面(表达式/指令)能从data读取数据显示 (编译/解析)
+      * 更新显示: 更新data中的属性数据==>页面更新
+  -->
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+
+</head>
+
+<body>
+  <!-- <div id="app">
+    <p>{{car.name}}</p>
+    <p>{{car.name}}</p>
+  </div> -->
+
+
+  <div id="app">
+    <p>{{car.color}}</p>
+    <p>{{car.color}}</p>
+
+  </div>
+  <script type="text/javascript">
+
+    const vm = new MVVM({
+      el: '#app',
+      data: {
+        car:{
+          color:'red'
+        }
+      }
+    })
+
+
+    /*
+    
+      data中的msg叫属性,html容器中的msg叫表达式
+      data对象中有多少个属性,就会创建对应个数的dep对象
+      当数据代理结束,模版解析之前,进行数据劫持操作,把vm中的data保存在劫持对象中的data属性中,
+      然后遍历vm中的data对象中所有的数据,通过Object.defineProperty方法把vm中data对象中的每个属性添加到劫持对象中的data属性中,在遍历这些属性之后,添加属性之前,要创建dep对象
+      数据劫持的时候
+      data中一个属性对应一个dep
+      模版解析的时候
+      html中有一个表达式就会创建一个watcher
+
+      1. 当实例化MVVM对象的时候,内部会进行数据代理的实现,紧接着开始进行数据劫持,把vm中的data保存在劫持对象中的data属性中,
+      然后遍历vm中的data对象中所有的数据,通过Object.defineProperty方法把vm中data对象中的每个属性添加到劫持对象中的data属性中,在遍历这些属性之后,添加属性之前,要创建dep对象,此时一个属性对应着一个dep对象
+      2. 当数据劫持结束后,开始进行模版解析,模版解析内部先创建文档碎片对象,然后把id为app的div中所有的节点全部的放在文档碎片对象中,开始遍历内部所有的子节点,判断节点是标签还是文本节点并且复合插值正则表达式,无论是标签还是文本节点要进行表达式的解析(指令(事件指令/普通指令)/插值),都会调用bind方法,bind方法内部会创建监视对象,只要是html容器中有一个表达式,就会创建一个监视对象,如此,多个表达式就会创建多个监视(watcher)对象
+
+      3. 在监视对象内部,为了获取表达式的值(为了获取html容器中对应的表达式在vm对象中的data对象中的属性的值),此时开始建立dep对象和watcher对象的关系,dep和watcher关系,如下:
+      (解析html模版的时候为了获取表达式的值的时候,此时建立dep和watcher的关系
+      建立dep和watcher的关系)
+      1对1的关系:一个dep对应一个watcher的关系,data中一个属性,html容器中一个表达式
+      1对多的关系:一个dep对应多个watcher的关系,data中一个属性,html容器中多个表达式
+      多对1的关系:多个dep对应一个watcher的关系,data中多个属性,html容器中一个表达式
+      多对多的关系:多个dep对应多个watcher的关系,data中多个属性,html容器中多个表达式
+      
+        3.1 如何建立关系呢? 当在监视对象内部为了获取表达式的值的时候,此时会进入到vm中的get方法中,会进入到劫持对象的get方法,然后会跳到watcher中,把dep添加到watcher中,watcher会添加到dep中,建立关系
+
+
+      为什么要建立关系? 如果数据变化了,界面就要重新渲染
+
+    
+    
+    
+    
+    
+    */
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>03_数据代理</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/watcher.js"></script>
+</head>
+
+<body>
+
+  <!--
+1. vue数据代理: data对象的所有属性的操作(读/写)由vm对象来代理操作
+2. 好处: 通过vm对象就可以方便的操作data中的数据
+3. 实现:
+  1). 通过Object.defineProperty(vm, key, {})给vm添加与data对象的属性对应的属性
+  2). 所有添加的属性都包含get/set方法
+  3). 在get/set方法中去操作data中对应的属性
+-->
+  <div id="app">
+
+  </div>
+  <script type="text/javascript">
+
+
+
+
+    const vm = new MVVM({
+      el:'#app',
+      data:{
+        msg:'困了'
+      }
+    })
+
+    // console.log(vm.data.msg)
+    console.log(vm.msg)
+    // console.dir(vm)
+    // MVVM中实现了数据代理
+
+  
+    // 面试题:说说你对Vue中数据代理的看法/理解,谈谈...(你对Vue的理解)
+    /*
+
+      Vue中有数据代理,实现方式:在创建Vue的实例对象的时候,传入配置对象并保存到内部的$options属性中,从里面获取data对象,保存到变量data中及_data属性中,通过Object.keys()遍历data中的所有的属性,内部通过Object.defineProperty()方法为vm对象添加data对象中的每个属性,从而实现数据代理
+
+      在实例化Vue的时候,内部会通过Object.keys获取data中的每个属性,然后遍历,通过Object.defineProperty()方法为vm添加data中的每个属性，从而实现数据代理
+    
+    
+    
+    */
+
+
+
+  </script>
+
+</body>
+
+</html>
