@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+</head>
+
+<body>
+  <button id="btn1">函数节流</button>
+  <button id="btn2">函数防抖</button>
+  <script type="text/javascript">
+
+    // 抽奖效果和拖拽的效果,搜索的时候进行请求的操作
+
+    // 函数节流
+    function throttle(callback, time) {
+
+      // 初始的时间
+      let start = 0
+      return function (...args) {
+        console.log('throttl执行了....')
+        // 当前时间
+        const current = Date.now()
+        // 判断时间差
+        if (current - start > time) {
+          // 保存当前的时间
+          start = current
+          callback.apply(this, args)
+        }
+      }
+    }
+
+
+    // 函数防抖
+    function debounce(callback, time) {
+
+      return function (...args) {
+        console.log('debounce执行了...')
+        // 判断该定时器的id是否存在,存在则删除
+        if (callback.timeId) {
+          clearTimeout(callback.timeId)         
+        }
+        callback.timeId = setTimeout(() => {
+          delete callback.timeId
+          callback.apply(this, args)
+        }, time);
+      }
+    }
+
+    function f1() {
+      console.log('事件触发了')
+    }
+    // 按钮绑定点击事件
+    document.getElementById('btn1').onclick = throttle(f1, 2000);
+    document.getElementById('btn2').onclick = debounce(f1, 2000); // = 右边 应该是函数,不是函数调用
+
+  </script>
+</body>
+
+</html>
