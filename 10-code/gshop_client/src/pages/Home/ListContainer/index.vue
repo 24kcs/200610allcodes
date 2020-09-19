@@ -3,20 +3,21 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
+
+        <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="./images/banner3.jpg" />
+              <img src="./images/banner1.jpg" alt />
             </div>
-            <!-- <div class="swiper-slide">
-                <img src="./images/banner2.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="./images/banner3.jpg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="./images/banner4.jpg" />
-            </div>-->
+            <div class="swiper-slide">
+              <img src="./images/banner2.jpg" alt />
+            </div>
+            <div class="swiper-slide">
+              <img src="./images/banner3.jpg" alt />
+            </div>
+            <div class="swiper-slide">
+              <img src="./images/banner4.jpg" alt />
+            </div>
           </div>
           <!-- 如果需要分页器 -->
           <div class="swiper-pagination"></div>
@@ -25,6 +26,29 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
+
+        <!-- <div class="swiper-container" id="mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="./images/banner3.jpg" />
+            </div>
+            <div class="swiper-slide">
+                <img src="./images/banner2.jpg" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/banner3.jpg" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/banner4.jpg" />
+            </div>
+          </div>
+          如果需要分页器 
+          <div class="swiper-pagination"></div>
+
+          如果需要导航按钮 
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>-->
       </div>
       <div class="right">
         <div class="news">
@@ -109,8 +133,36 @@
   </div>
 </template>
 <script>
+// 引入vuex的辅助函数
+import { mapState } from 'vuex'
+// 引入swiper对象
+import Swiper from 'swiper'
+// 引入swiper的样式
+import 'swiper/css/swiper.css'
 export default {
   name: 'ListContainer',
+  computed: {
+    ...mapState({
+      banners: (state) => state.home.banners,
+    }),
+  },
+  // 当前组件渲染完毕的生命周期回调
+  mounted() {
+    var mySwiper = new Swiper('.swiper-container', {
+      loop: true, // 循环模式选项
+
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // 如果需要前进后退按钮
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    })
+  },
 }
 </script>
 <style lang="less" rel="stylesheet/less" scoped>

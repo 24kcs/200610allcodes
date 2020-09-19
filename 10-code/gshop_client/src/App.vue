@@ -17,7 +17,7 @@ export default {
     Header,
     Footer,
   },
-  async mounted() {
+  mounted() {
     // 分发action
     this.$store.dispatch('getBaseCategoryList')
   },

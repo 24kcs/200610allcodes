@@ -1,5 +1,7 @@
 <template>
-  <div>Search</div>
+  <div>
+    <TypeNav/>
+  </div>
 </template>
 <script>
 export default {

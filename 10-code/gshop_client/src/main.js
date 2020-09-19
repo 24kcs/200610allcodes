@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 // 引入TypeNav组件
 import TypeNav from '@/components/TypeNav'
+// 引入mock
+import './mock'
 Vue.config.productionTip = false
 
 // 设置为全局的公共组件

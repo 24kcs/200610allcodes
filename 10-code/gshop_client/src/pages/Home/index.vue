@@ -31,6 +31,7 @@ import Like from './Like'
 import Floor from './Floor'
 // 引入Brand组件
 import Brand from './Brand'
+// import {reqBanners,reqFloors} from '@/api'
 export default {
   name: 'Home',
   components: {
@@ -40,6 +41,14 @@ export default {
     Like,
     Floor,
     Brand,
+  },
+  mounted() {
+    // const result1 = await reqBanners()
+    // const result2 = await reqFloors()
+    // console.log(result1)
+    // console.log(result2)
+    this.$store.dispatch('getBanners')
+    this.$store.dispatch('getFloors')
   },
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="type-nav">
     <div class="container">
-      <div @mouseleave="currentIndex=-2">
+      <div @mouseleave="hideFirst" @mouseenter="showFirst">
         <h2 class="all">全部商品分类</h2>
-        <div class="sort">
+        <div class="sort" @click="toSearch" v-if="isShowFirst">
           <div class="all-sort-list2">
             <div
               class="item"
@@ -13,17 +13,41 @@
               @mouseenter="showSubCategory(index)"
             >
               <h3>
-                <a href>{{c1.categoryName}}</a>
+                <a
+                  href="javascript:;"
+                  :data-categoryName="c1.categoryName"
+                  :data-category1Id="c1.categoryId"
+                >{{c1.categoryName}}</a>
+                <!-- <a href="javascript:;" @click="toSearch(c1.categoryName,c1.categoryId)">{{c1.categoryName}}</a> -->
+                <!-- <router-link
+                  :to="{path:'/search',query:{categoryName:c1.categoryName,category1Id:c1.categoryId}}"
+                >{{c1.categoryName}}</router-link>-->
               </h3>
               <div class="item-list clearfix">
                 <div class="subitem">
                   <dl class="fore" v-for="(c2,index) in c1.categoryChild" :key="c2.categoryId">
                     <dt>
-                      <a href>{{c2.categoryName}}</a>
+                      <!-- <a href="javascript:;">{{c2.categoryName}}</a> -->
+                      <a
+                        href="javascript:;"
+                        :data-categoryName="c2.categoryName"
+                        :data-category2Id="c2.categoryId"
+                      >{{c2.categoryName}}</a>
+                      <!-- <router-link
+                        :to="{path:'/search',query:{categoryName:c2.categoryName,category2Id:c2.categoryId}}"
+                      >{{c2.categoryName}}</router-link>-->
                     </dt>
                     <dd>
                       <em v-for="(c3,index) in c2.categoryChild" :key="c3.categoryId">
-                        <a href>{{c3.categoryName}}</a>
+                        <!-- <a href="javascript:;">{{c3.categoryName}}</a> -->
+                        <a
+                          href="javascript:;"
+                          :data-categoryName="c3.categoryName"
+                          :data-category3Id="c3.categoryId"
+                        >{{c3.categoryName}}</a>
+                        <!-- <router-link
+                          :to="{path:'/search',query:{categoryName:c3.categoryName,category3Id:c3.categoryId}}"
+                        >{{c3.categoryName}}</router-link>-->
                       </em>
                     </dd>
                   </dl>
@@ -50,14 +74,15 @@
 <script>
 // 引入Vuex中的辅助函数
 import { mapState } from 'vuex'
-// 引入lodash
-import _ from 'lodash'
+// 引入lodash,按需引入
+import throttle from 'lodash/throttle'
 export default {
   name: 'TypeNav',
   // 状态数据
   data() {
     return {
       currentIndex: -2, // 用来存储鼠标进入某一项的时候的索引
+      isShowFirst: true, // 默认的是true,菜单是显示的
     }
   },
   // 计算属性
@@ -70,10 +95,65 @@ export default {
   // 方法
   methods: {
     // 鼠标进入事件
-    showSubCategory: _.throttle(function (index) {
+    showSubCategory: throttle(function (index) {
       // 鼠标进入的时候把当前的这个项的索引保存起来
-      this.currentIndex = index
+      if (this.currentIndex !== -2) {
+        this.currentIndex = index
+      }
     }, 200),
+
+    // 点击外层的div标签,实现路由跳转
+    toSearch(e) {
+      // 事件委托
+      // console.dir(e.target)
+      const nodeTarget = e.target
+      if (nodeTarget.nodeName === 'A') {
+        // 此时是a标签
+        // console.log(nodeTarget.dataset)
+        // 解构,获取分类的名字和对应的id值
+        const {
+          categoryname,
+          category1id,
+          category2id,
+          category3id,
+        } = nodeTarget.dataset
+        const query = {
+          categoryName: categoryname,
+        }
+        // 判断
+        if (category1id) {
+          query.category1Id = category1id
+        } else if (category2id) {
+          query.category2Id = category2id
+        } else if (category3id) {
+          query.category3Id = category3id
+        }
+        // 路由跳转
+        this.$router.push({ path: '/search', query })
+        // 隐藏高亮显示的效果
+        this.currentIndex = -2
+        // 坑
+      }
+    },
+    // 鼠标进入
+    showFirst() {
+      this.isShowFirst = true
+      this.currentIndex = -1
+    },
+    // 鼠标离开
+    hideFirst() {
+      this.currentIndex = -2
+      if (this.$route.path !== '/') {
+        this.isShowFirst = false
+      }
+    },
+  },
+  // 该组件加载完毕的时候里面的菜单是否隐藏取决于当前的地址(路由地址/路径)
+  mounted() {
+    if (this.$route.path !== '/') {
+      // 如果不是首页,那么菜单就要隐藏
+      this.isShowFirst = false
+    }
   },
 }
 </script>
