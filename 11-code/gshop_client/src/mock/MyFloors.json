@@ -1,0 +1,34 @@
+[
+  {
+    "id":1,
+    "name":"floor1",
+    "keywords":["节能补贴","4K电视"],
+    "hotwords":{
+      "id":1,
+      "word1":"热门",
+      "word2":"大家电"
+    },
+    "imgs":[
+      {
+        "id":1,
+        "imgUrl":"1/jpg"
+      }
+    ]
+  },
+  {
+    "id":2,
+    "name":"floor2",
+    "keywords":["节能补贴","4K电视"],
+    "hotwords":{
+      "id":1,
+      "word1":"热门",
+      "word2":"大家电"
+    },
+    "imgs":[
+      {
+        "id":1,
+        "imgUrl":"1/jpg"
+      }
+    ]
+  }
+]
