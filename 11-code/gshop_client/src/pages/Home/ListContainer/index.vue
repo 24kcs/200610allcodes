@@ -4,7 +4,6 @@
       <div class="center">
         <!--banner轮播-->
         <Carousel :carouselList="banners" />
-  
       </div>
       <div class="right">
         <div class="news">

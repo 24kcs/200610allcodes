@@ -6,3 +6,5 @@ export const reqBaseCategoryList = () => ajax.get(`/product/getBaseCategoryList`
 // 设置mock的相关的api接口函数
 export const reqBanners = () => ajaxMock.get('/banners')
 export const reqFloors = () => ajaxMock.get('/floors')
+// 获取商品信息数据对象
+export const reqProductList = (searchParams) => ajax.post(`/list`, searchParams)
