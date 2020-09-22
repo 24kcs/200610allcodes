@@ -15,6 +15,17 @@ export default {
   actions: {
     // 获取商品信息数据对象
     async getProductList ({ commit }, searchParams) {
+      // 干掉无用的参数数据
+      searchParams={
+        ...searchParams
+      }
+      // 优化参数处理
+      Object.keys(searchParams).forEach(key=>{
+        // 判断这里的数据是不是空的数据,或者这里的数据的类型是不是数组,而且数组没有数据
+        if(searchParams[key]===''||searchParams[key] instanceof Array&&searchParams[key].length===0){
+          delete searchParams[key]
+        }
+      })
       const result = await reqProductList(searchParams)
       if (result.code === 200) {
         commit('RECEIVE_PRODUCT_LIST', result.data)

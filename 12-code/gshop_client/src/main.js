@@ -18,7 +18,14 @@ Vue.config.productionTip = false
 Vue.component('TypeNav',TypeNav)
 // 参数1:组件的名字,参数2:组件对象
 Vue.component('Carousel',Carousel)
+
+// Vue.prototype.$bus = new Vue()
 new Vue({
+  // 数据初始化之前
+  beforeCreate () {
+    // 事件总线的方式
+    Vue.prototype.$bus = new Vue()
+  },
   // 渲染App组件
   render: h => h(App),
   router, // 注册路由器

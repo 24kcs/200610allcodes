@@ -117,8 +117,14 @@ export default {
           this.$router.push({ name: 'search' })
         }
       }
+      // this.keyword=''
     },
   },
+  mounted () {
+    this.$bus.$on('removeKeyword',()=>{
+      this.keyword = '' // 清空文本框
+    })
+  }
 }
 </script>
 <style lang="less" rel="stylesheet/less" scoped>

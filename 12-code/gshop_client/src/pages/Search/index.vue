@@ -17,39 +17,51 @@
               <i @click="removeCategory">×</i>
             </li>
             <!--搜索的关键字-->
-             <li class="with-x" v-if="options.keyword">
+            <li class="with-x" v-if="options.keyword">
               {{options.keyword}}
               <i @click="removeKeyword">×</i>
+            </li>
+            <!--品牌的名字-->
+            <li class="with-x" v-if="options.trademark">
+              {{options.trademark}}
+              <i @click="removeTrademark">×</i>
+            </li>
+            <!--平台属性数据的展示-->
+            <li class="with-x" v-for="(prop,index) in options.props" :key="prop">
+              {{prop}}
+              <i @click="removeProp(index)">×</i>
             </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector :setTrademark="setTrademark" :addProps="addProps" />
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <!-- <li :class="{active:options.order.indexOf('1')===0}"> -->
+
+                <li :class="{active:isActive('1')}" @click="setOrder('1')">
+                  <a href="javascript:;">综合{{getOrderText('1')}}</a>
                 </li>
                 <li>
-                  <a href="#">销量</a>
+                  <a href="javascript:;">销量</a>
                 </li>
                 <li>
-                  <a href="#">新品</a>
+                  <a href="javascript:;">新品</a>
                 </li>
                 <li>
-                  <a href="#">评价</a>
+                  <a href="javascript:;">评价</a>
                 </li>
-                <li>
-                  <a href="#">价格⬆</a>
+                <li :class="{active:isActive('2')}" @click="setOrder('2')">
+                  <a href="javascript:;">价格{{getOrderText('2')}}</a>
                 </li>
-                <li>
-                  <a href="#">价格⬇</a>
-                </li>
+                <!-- <li>
+                  <a href="#">价格⬇⬆</a>
+                </li>-->
               </ul>
             </div>
           </div>
@@ -145,7 +157,7 @@ export default {
         category3Id: '', // 三级分类的id
         categoryName: '', // 分类的名字
         props: [], // ['2218:6.75-6.84英寸:屏幕尺寸']--->['平台属性的id:属性值:属性名字']
-        trademark: '', // 品牌的名字  '品牌的id:品牌的名字'
+        // trademark: '', // 品牌的名字  '品牌的id:品牌的名字'
         order: '1:desc', // 排序的方式 1--->排序的标识,desc--->排序的方式 ,1--综合,2---价格 ,desc---降序,asc---升序
         pageNo: 1, // 默认获取的是第一页的数据
         pageSize: 3, // 默认每页3条数据
@@ -171,10 +183,10 @@ export default {
       const { query, params } = to
       const options = {
         ...this.options,
-        category1Id:'', // 重置数据
-        category2Id:'', // 重置数据
-        category3Id:'', // 重置数据
-        categoryName:'', // 重置数据
+        category1Id: '', // 重置数据
+        category2Id: '', // 重置数据
+        category3Id: '', // 重置数据
+        categoryName: '', // 重置数据
         ...query,
         ...params,
       }
@@ -206,24 +218,94 @@ export default {
       this.$store.dispatch('getProductList', this.options)
     },
     // 移除分类信息的名字
-    removeCategory(){
+    removeCategory() {
       // 清理一级/二级/三级分类的id及名字
-      this.options.category1Id=''
-      this.options.category2Id=''
-      this.options.category3Id=''
-      this.options.categoryName=''
+      this.options.category1Id = ''
+      this.options.category2Id = ''
+      this.options.category3Id = ''
+      this.options.categoryName = ''
       // this.getProductList()// 重新数据  数据确实重新获取,但是路由地址没有清理
       // console.log(this.$route.params)
       // 路由的跳转
       this.$router.replace(this.$route.path)
     },
     // 移除搜索关键字
-    removeKeyword(){
-      this.options.keyword= ''
+    removeKeyword() {
+      this.options.keyword = ''
       // 路由跳转
-
+      this.$router.replace({ path: '/search', query: this.$route.query })
       // 干掉Header组件中的文本框中的数据
-    }
+      this.$bus.$emit('removeKeyword')
+    },
+    // 更新品牌的参数数据
+    setTrademark(tmId, tmName) {
+      // 这种方式添加的属性属于非响应式属性数据,
+      // 响应式数据:在data中定义的数据,该数据如果发生了变化,页面会自动的渲染
+      // this.options.trademark = `${tmId}:${tmName}`
+      // 向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。
+      this.$set(this.options,'trademark',`${tmId}:${tmName}`)
+      // console.log(this.options.trademark)
+      // 重新发送请求,获取商品信息数据
+      this.getProductList()
+    },
+    // 移除品牌的名字
+    removeTrademark() {
+      // 是把数据清空,并不是删除
+      // this.options.trademark = ''
+      // 这种方式不是移除响应式数据的操作
+      // delete this.options.trademark
+
+      // 删除对象的 property。如果对象是响应式的，确保删除能触发更新视图
+      this.$delete(this.options,'trademark')
+      // 重新发送请求,获取商品信息数据
+      this.getProductList()
+    },
+    // 更新平台属性数组的数据
+    addProps(propId, propVal, propName) {
+      // 拼接平台属性的值
+      const prop = `${propId}:${propVal}:${propName}`
+      // 判断该数组中这个数据是否存在,不存在则添加
+      if (this.options.props.indexOf(prop) === -1) {
+        this.options.props.push(prop)
+        // 重新获取数据
+        this.getProductList()
+      }
+    },
+    // 移除平台属性数据
+    removeProp(index) {
+      this.options.props.splice(index, 1)
+    },
+    // 设置排序的选项的类样式
+    isActive(flag) {
+      return this.options.order.indexOf(flag) === 0
+    },
+    // 改变排序的方式,或者是排序的类型
+    setOrder(flag) {
+      // 获取排序的标识和排序方式
+      let [orderFlag, orderType] = this.options.order.split(':')
+      // 判断排序的标识是否一致
+      if (orderFlag === flag) {
+        orderType = orderType === 'desc' ? 'asc' : 'desc'
+      } else {
+        orderFlag = flag // 标识已经改变
+        orderType = 'desc' // 默认是降序
+      }
+      // 更新参数数据
+      this.options.order = orderFlag + ':' + orderType
+      // 重新获取数据
+      this.getProductList()
+    },
+    // 显示箭头
+    getOrderText(flag) {
+      // 获取排序的标识和排序方式
+      let [orderFlag, orderType] = this.options.order.split(':')
+      // 判断标识是否一致
+      if (orderFlag === flag) {
+        return orderType === 'desc' ? '⬇' : '⬆'
+      } else {
+        return ''
+      }
+    },
   },
 }
 </script>
