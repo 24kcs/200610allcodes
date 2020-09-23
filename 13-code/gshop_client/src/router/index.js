@@ -18,5 +18,9 @@ Vue.use(VueRouter)
 // 实例化路由器对象,并暴露出去
 export default new VueRouter({
   mode: 'history', // 地址栏中不带#
-  routes
+  routes,
+  // 解决路由跳转到滚动的位置
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 }) 

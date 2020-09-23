@@ -1,6 +1,6 @@
 <template>
-  <!--分页组件,有数据才能使用,没有数据,也不能报错,坑-->
-  <div class="pagination">
+  <!--分页组件,有数据才能使用,没有数据,也不能报错-->
+  <div class="pagination" v-if="pageConfig.total>0">
     <!--上一页-->
     <button :disabled="currentPage===1" @click="changeCurrentPage(currentPage-1)">上一页</button>
     <!--第一页-->
@@ -34,6 +34,13 @@ export default {
         showPageNo: 5, // 连续的页码数
       },
     },
+  },
+  watch: {
+    // 监视的是传入进来的页码值,如果变化了,立刻更新当前的页码
+    'pageConfig.pageNo'(val){
+      // 立刻更新当前的页码
+      this.currentPage = val
+    }
   },
   data() {
     return {
@@ -91,6 +98,8 @@ export default {
     changeCurrentPage(pageNo) {
       // 更新当前的页码
       this.currentPage = pageNo
+      // 通知父级组件,页码改变了,父级组件立刻重新根据新的页码获取新的数据
+      this.$emit('changeCurrentPage',pageNo)
     },
   },
 }

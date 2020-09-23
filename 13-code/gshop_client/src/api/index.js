@@ -8,3 +8,6 @@ export const reqBanners = () => ajaxMock.get('/banners')
 export const reqFloors = () => ajaxMock.get('/floors')
 // 获取商品信息数据对象
 export const reqProductList = (searchParams) => ajax.post(`/list`, searchParams)
+
+// 根据skuId获取商品的信息对象数据
+export const reqDetailInfo = (skuId) =>ajax.get(`/item/${skuId}`)

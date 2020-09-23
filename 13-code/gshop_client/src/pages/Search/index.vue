@@ -70,9 +70,13 @@
               <li class="yui3-u-1-5" v-for="(goods,index) in goodsList" :key="goods.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="javascript:;">
+                    <!--产品的图片-->
+                    <!-- <a href="javascript:;">
                       <img :src="goods.defaultImg" />
-                    </a>
+                    </a>-->
+                    <router-link :to="`/detail/${goods.id}`">
+                      <img :src="goods.defaultImg" />
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -81,7 +85,9 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a href="javascript:;" :title="goods.title">{{goods.title}}</a>
+                    <!--产品的名字-->
+                    <!-- <a href="javascript:;" :title="goods.title">{{goods.title}}</a> -->
+                    <router-link :to="`/detail/${goods.id}`" :title="goods.title">{{goods.title}}</router-link>
                   </div>
                   <div class="commit">
                     <i class="command">
@@ -98,8 +104,11 @@
             </ul>
           </div>
           <!-- <div class="fr page"> -->
-            <!---分页-->
-            <Pagination :pageConfig="{total:productList.total,pageNo:options.pageNo,pageSize:options.pageSize,showPageNo:5}" @changeCurrentPage="changeCurrentPage" />
+          <!---分页-->
+          <Pagination
+            :pageConfig="{total:productList.total,pageNo:options.pageNo,pageSize:options.pageSize,showPageNo:5}"
+            @changeCurrentPage="getProductList"
+          />
           <!-- </div> -->
         </div>
       </div>
@@ -130,7 +139,7 @@ export default {
         // trademark: '', // 品牌的名字  '品牌的id:品牌的名字'
         order: '1:desc', // 排序的方式 1--->排序的标识,desc--->排序的方式 ,1--综合,2---价格 ,desc---降序,asc---升序
         pageNo: 1, // 默认获取的是第一页的数据
-        pageSize: 2, // 默认每页3条数据
+        pageSize: 5, // 默认每页3条数据
         keyword: '', // 搜索关键字
       },
     }
@@ -183,7 +192,9 @@ export default {
   },
   methods: {
     // 获取商品信息数据对象
-    getProductList() {
+    getProductList(pageNo = 1) {
+      // 更新页码
+      this.options.pageNo = pageNo
       // 分发的action
       this.$store.dispatch('getProductList', this.options)
     },
@@ -213,7 +224,7 @@ export default {
       // 响应式数据:在data中定义的数据,该数据如果发生了变化,页面会自动的渲染
       // this.options.trademark = `${tmId}:${tmName}`
       // 向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。
-      this.$set(this.options,'trademark',`${tmId}:${tmName}`)
+      this.$set(this.options, 'trademark', `${tmId}:${tmName}`)
       // console.log(this.options.trademark)
       // 重新发送请求,获取商品信息数据
       this.getProductList()
@@ -226,7 +237,7 @@ export default {
       // delete this.options.trademark
 
       // 删除对象的 property。如果对象是响应式的，确保删除能触发更新视图
-      this.$delete(this.options,'trademark')
+      this.$delete(this.options, 'trademark')
       // 重新发送请求,获取商品信息数据
       this.getProductList()
     },
@@ -277,12 +288,19 @@ export default {
       }
     },
     // 自定义事件-传递给子级的分页组件的
-    changeCurrentPage(pageNo){
-      this.options.pageNo= pageNo
-      this.getProductList()
-    }
+    // changeCurrentPage(pageNo) {
+    //   // this.options.pageNo = pageNo
+    //   this.getProductList(pageNo)
+    // },
   },
 }
+
+// function f2(num){}
+// function f1(num){
+//   f2(num)
+// }
+
+// f2(10)
 </script>
 
 <style lang="less" scoped>
