@@ -10,4 +10,7 @@ export const reqFloors = () => ajaxMock.get('/floors')
 export const reqProductList = (searchParams) => ajax.post(`/list`, searchParams)
 
 // 根据skuId获取商品的信息对象数据
-export const reqDetailInfo = (skuId) =>ajax.get(`/item/${skuId}`)
+export const reqDetailInfo = (skuId) => ajax.get(`/item/${skuId}`)
+
+// 根据商品的skuId和数量skuNum添加购物车的api接口函数
+export const reqAddToCart = (skuId, skuNum) => ajax.post(`/cart/addToCart/${skuId}/${skuNum}`)
