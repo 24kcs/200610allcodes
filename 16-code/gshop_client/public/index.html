@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <!--引入的样式文件,要使用绝对路径,而不是相对路径,因为有路由的存在-->
+    <!--样式重置文件-->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <!--图标字体文件-->
+    <!-- <link rel="stylesheet" href="/css/iconfont.css"> -->
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
