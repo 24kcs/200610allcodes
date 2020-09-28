@@ -7,8 +7,8 @@
           <span class="success-info">订单提交成功，请您及时付款，以便尽快为您发货~~</span>
         </h4>
         <div class="paymark">
-          <span class="fl">请您在提交订单<em class="orange time">4小时</em>之内完成支付，超时订单会自动取消。订单号：<em>145687</em></span>
-          <span class="fr"><em class="lead">应付金额：</em><em class="orange money">￥17,654</em></span>
+          <span class="fl">请您在提交订单<em class="orange time">4小时</em>之内完成支付，超时订单会自动取消。订单号：<em>{{payInfo.orderId}}</em></span>
+          <span class="fr"><em class="lead">应付金额：</em><em class="orange money">￥{{payInfo.totalFee}}</em></span>
         </div>
       </div>
       <div class="checkout-info">
@@ -82,8 +82,24 @@
 </template>
 
 <script>
+// 引入vuex的辅助函数
+import {mapState} from 'vuex'
   export default {
     name: 'Pay',
+    props:['orderId'],
+    computed: {
+      ...mapState({
+        payInfo:state=>state.order.payInfo
+      })
+    },
+    mounted () {
+      // 先获取路由跳转的时候传入进来的query的参数是orderId
+
+      // 换一个方式获取orderId(路由的参数)
+      // const orderId = this.$route.query.orderId
+      // 分发action
+      this.$store.dispatch('getPayInfo',this.orderId)
+    }
   }
 </script>
 

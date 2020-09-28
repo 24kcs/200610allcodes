@@ -35,7 +35,9 @@ export default [
   // Pay路由组件
   {
     path:'/pay',
-    component:Pay
+    component:Pay,
+    // 通过props的方式来进行参数的传递,让组件和$route之间的关闭不那么的密切(解耦)
+    props:(route)=>({orderId:route.query.orderId})
   },
   // PaySuccess路由组件
   {
