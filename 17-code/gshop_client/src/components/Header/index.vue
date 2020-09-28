@@ -7,7 +7,8 @@
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
           <p v-if="userInfo.name">
-            <span>{{userInfo.name}}</span>&nbsp;
+            <span>{{ userInfo.name }}</span
+            >&nbsp;
             <a href="javascript:;" @click="logout">退出</a>
           </p>
           <p v-else>
@@ -19,9 +20,10 @@
           </p>
         </div>
         <div class="typeList">
-          <a href="javascript:;">我的订单</a>
+          <!-- <a href="javascript:;">我的订单</a> -->
+          <router-link to="/center">我的订单</router-link>
           <!-- <a href="###">我的购物车</a> -->
-         <router-link to="/shopcart">我的购物车</router-link>
+          <router-link to="/shopcart">我的购物车</router-link>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
           <a href="###">企业采购</a>
@@ -43,8 +45,19 @@
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="toSearch">搜索</button>
+          <input
+            type="text"
+            id="autocomplete"
+            class="input-error input-xxlarge"
+            v-model="keyword"
+          />
+          <button
+            class="sui-btn btn-xlarge btn-danger"
+            type="button"
+            @click="toSearch"
+          >
+            搜索
+          </button>
         </form>
       </div>
     </div>
@@ -52,7 +65,7 @@
 </template>
 <script>
 // 引入vuex的辅助函数
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'Header',
   // 数据对象
@@ -65,8 +78,8 @@ export default {
   computed: {
     // 获取用户信息
     ...mapState({
-      userInfo:state=>state.user.userInfo
-    })
+      userInfo: (state) => state.user.userInfo,
+    }),
   },
   methods: {
     // 点击按钮跳转到Search界面
@@ -135,17 +148,17 @@ export default {
     },
 
     // 退出操作
-    logout(){
-      if(window.confirm('您确定要退出吗')){
+    logout() {
+      if (window.confirm('您确定要退出吗')) {
         this.$store.dispatch('logout')
       }
-    }
+    },
   },
-  mounted () {
-    this.$bus.$on('removeKeyword',()=>{
+  mounted() {
+    this.$bus.$on('removeKeyword', () => {
       this.keyword = '' // 清空文本框
     })
-  }
+  },
 }
 </script>
 <style lang="less" rel="stylesheet/less" scoped>

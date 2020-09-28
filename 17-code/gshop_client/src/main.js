@@ -16,6 +16,10 @@ import Carousel from '@/components/Carousel'
 import Pagination from '@/components/Pagination'
 // 引入validate.js文件
 import './utils/validate'
+// 引入api接口
+import * as API from '@/api'
+// 把API绑定到Vue的原型对象上即可
+Vue.prototype.$API= API
 Vue.config.productionTip = false
 
 // 设置为全局的公共组件
