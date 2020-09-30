@@ -75,7 +75,8 @@
                       <img :src="goods.defaultImg" />
                     </a>-->
                     <router-link :to="`/detail/${goods.id}`">
-                      <img :src="goods.defaultImg" />
+                      <!-- <img :src="goods.defaultImg" /> -->
+                       <img v-lazy="goods.defaultImg" />
                     </router-link>
                   </div>
                   <div class="price">
@@ -139,7 +140,7 @@ export default {
         // trademark: '', // 品牌的名字  '品牌的id:品牌的名字'
         order: '1:desc', // 排序的方式 1--->排序的标识,desc--->排序的方式 ,1--综合,2---价格 ,desc---降序,asc---升序
         pageNo: 1, // 默认获取的是第一页的数据
-        pageSize: 5, // 默认每页3条数据
+        pageSize: 10, // 默认每页3条数据
         keyword: '', // 搜索关键字
       },
     }

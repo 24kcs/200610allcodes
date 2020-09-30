@@ -24,7 +24,9 @@ import Center from '@/pages/Center'
 // 引入MyOrder组件
 import MyOrder from '@/pages/Center/MyOrder'
 // 引入GroupBuy组件
-import GroupBuy from '@/pages/Center/GroupBuy'
+// import GroupBuy from '@/pages/Center/GroupBuy'
+// 路由的懒加载
+const GroupBuy=()=>import('@/pages/Center/GroupBuy')
 // 引入store
 import store from '@/store'
 // 向外暴露所有组件对象的数组

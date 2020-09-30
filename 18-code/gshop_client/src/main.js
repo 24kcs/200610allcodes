@@ -20,6 +20,17 @@ import './utils/validate'
 import * as API from '@/api'
 // 引入elements文件,可以让当前的项目使用element-ui组件库
 import './utils/elements'
+// 引入懒加载的插件---图片的懒加载
+import VueLazyload from 'vue-lazyload'
+// https://www.cnblogs.com/rachelch/p/9802227.html
+// 引入动态加载的图片
+import loading from './assets/loading.gif'
+Vue.use(VueLazyload, {
+  loading
+})
+
+
+
 // 把API绑定到Vue的原型对象上即可
 Vue.prototype.$API= API
 Vue.config.productionTip = false
