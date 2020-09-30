@@ -18,7 +18,10 @@ src目录:
     使用到的组件:
     Button/Table/Pagination/Dialog/Upload/Input/MessageBox/Message
 
-
+    Vue中的组件的时候: 
+    组件的命名: 首字母大写,多个单词每个单词的首字母都是大写的
+      例子: HuaPay  ,HuaSearch
+    组件的使用: <HuaPay/> ----> <hua-pay/>  <hua-search>
 
 
 */
